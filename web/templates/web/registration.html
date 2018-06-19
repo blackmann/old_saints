@@ -1,0 +1,80 @@
+{% extends "web/base.html" %}
+
+{% block content %}
+    <div class="hero">
+        <div class="hero-body">
+            <div class="columns">
+                <div class="column">
+                    <h1 class="title is-1">Complete Registration</h1>
+                </div>
+                
+                <div class="column container is-fluid">
+                        <h3 class="title">Finish Up</h3>
+                        <form action={ % url 'web:home' %} method="post">
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="field">
+                                        <label for="name" class="label">First Name</label>
+                                        <input class="input" name="first_name" type="text">
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="field">
+                                        <label for="name" class="label">Last Name</label>
+                                        <input class="input" name="last_name" type="text">
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="field">
+                                <label class="label">Email</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    <input class="input" type="email" name="email" placeholder="Email input" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                </div>
+                                {% comment %}
+                                <p class="help is-danger">This email is invalid</p> {% endcomment %}
+                            </div>
+        
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">Year of Completion</label>
+                                        <div class="control">
+                                            <div class="select">
+                                                <select name="year_of_completion">
+                                                    <option value="1990">1990</option>
+                                                    <option value="1991">1991</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">House</label>
+                                        <div class="control">
+                                            <div class="select">
+                                                <select name="house">
+                                                    <option>Obiri Yeboah</option>
+                                                    <option>Opuni Ato</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% csrf_token %}
+        
+                            <button class="button is-primary">Complete Registration</button>
+                            <p class="is-size-7">
+                                <br> You will need to provide two references in order for your registration to be verified. Click Complete
+                                Registration to proceed.</p>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
