@@ -11,12 +11,6 @@ class Chapter(models.Model):
     code = models.CharField(max_length=10)
 
 
-class Reference(models.Model):
-    name = models.CharField(max_length=100)
-    mobile = models.CharField(max_length=17)
-    year_of_completion = models.IntegerField()
-    house = models.ForeignKey(House, on_delete=models.CASCADE)
-
 class Alumnum(models.Model):
     user = models.OneToOneField(User, related_name="alumnum", on_delete=models.CASCADE)
     mobile = models.CharField(max_length=17)
@@ -34,8 +28,8 @@ class Alumnum(models.Model):
     member_id = models.CharField(max_length=20)
     profession = models.CharField(max_length=100)
 
-    reference_1 = models.ForeignKey(Reference,related_name="alumnus_1", on_delete=models.CASCADE)
-    reference_2 = models.ForeignKey(Reference, on_delete=models.CASCADE, null=True)
+    reference_1 = models.TextField()
+    reference_2 = models.TextField()
     
     verified = models.BooleanField(default=False)
 
