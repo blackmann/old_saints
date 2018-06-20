@@ -32,4 +32,11 @@ def register(request):
         "pre_form": request.GET
     }
 
+    if request.method == 'POST':
+        return redirect('web:registration_done')
+
     return render(request, "web/registration.html", context)
+
+
+def done(request):
+    return render(request, "web/registration_complete.html")

@@ -14,15 +14,23 @@
     <header>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
+                <a class="navbar-item" href={% url 'web:home' %}>
                     <strong>OLD SAINTS</strong>
                 </a>
+            </div>
 
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <a href="">Jobs</a>
+                </div>
+
+                <div class="navbar-item">
+                    <a href="">Schorlaships</a>
+                </div>
+
+                <div class="navbar-item">
+                    <a href="">Polls</a>
+                </div>
             </div>
         </nav>
     </header>

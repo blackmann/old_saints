@@ -1,80 +1,177 @@
-{% extends "web/base.html" %}
+{% extends "web/base.html" %} {% block content %}
+<div class="hero">
+    <div class="hero-body">
+        <div class="columns">
+            <div class="column is-fluid">
+                <h1 class="title is-1">Complete
+                    <br> Registration</h1>
+            </div>
 
-{% block content %}
-    <div class="hero">
-        <div class="hero-body">
-            <div class="columns">
-                <div class="column">
-                    <h1 class="title is-1">Complete Registration</h1>
-                </div>
-                
-                <div class="column container is-fluid">
-                        <h3 class="title">Finish Up</h3>
-                        <form action={ % url 'web:home' %} method="post">
-                            <div class="columns">
-                                <div class="column">
-                                    <div class="field">
-                                        <label for="name" class="label">First Name</label>
-                                        <input class="input" name="first_name" type="text">
-                                    </div>
-                                </div>
-                                <div class="column">
-                                    <div class="field">
-                                        <label for="name" class="label">Last Name</label>
-                                        <input class="input" name="last_name" type="text">
-                                    </div>
-                                </div>
-                            </div>
-        
+            <div class="column container is-fluid">
+                <h3 class="title">Finish Up</h3>
+                <form action={% url 'web:register' %} method="post">
+                    <div class="columns">
+                        <div class="column">
                             <div class="field">
-                                <label class="label">Email</label>
-                                <div class="control has-icons-left has-icons-right">
-                                    <input class="input" type="email" name="email" placeholder="Email input" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-                                    <span class="icon is-small is-left">
-                                        <i class="fas fa-envelope"></i>
-                                    </span>
-                                </div>
-                                {% comment %}
-                                <p class="help is-danger">This email is invalid</p> {% endcomment %}
+                                <label for="name" class="label">First Name</label>
+                                <input class="input" name="first_name" type="text" value="{{ pre_form.f }}">
                             </div>
-        
-                            <div class="columns">
-                                <div class="column">
-                                    <div class="field">
-                                        <label class="label">Year of Completion</label>
-                                        <div class="control">
-                                            <div class="select">
-                                                <select name="year_of_completion">
-                                                    <option value="1990">1990</option>
-                                                    <option value="1991">1991</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="column">
-                                    <div class="field">
-                                        <label class="label">House</label>
-                                        <div class="control">
-                                            <div class="select">
-                                                <select name="house">
-                                                    <option>Obiri Yeboah</option>
-                                                    <option>Opuni Ato</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <label for="name" class="label">Last Name</label>
+                                <input class="input" name="last_name" type="text" value="{{ pre_form.l }}">
                             </div>
-                            {% csrf_token %}
-        
-                            <button class="button is-primary">Complete Registration</button>
-                            <p class="is-size-7">
-                                <br> You will need to provide two references in order for your registration to be verified. Click Complete
-                                Registration to proceed.</p>
-                        </form>
+                        </div>
                     </div>
+
+                    <div class="field">
+                        <label class="label">Email</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input" type="email" value="{{ pre_form.e }}" name="email" placeholder="Email input" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                        </div>
+                        {% comment %}
+                        <p class="help is-danger">This email is invalid</p> {% endcomment %}
+                    </div>
+
+                    <div class="columns">
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">Year of Completion</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="year_of_completion">
+                                            <option value="1990">1990</option>
+                                            <option value="1991">1991</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">House</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="house">
+                                            <option>Obiri Yeboah</option>
+                                            <option>Opuni Ato</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <label class="radio">
+                            <input type="radio" name="exam_type" checked> O'Level
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="exam_type"> A'Level
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="exam_type"> SSSCE
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="exam_type"> WASSCE
+                        </label>
+                    </div>
+                    <br>
+                    <div class="columns">
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">Chapter Affiliation</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="chapter">
+                                            <option value="ACC">Accra</option>
+                                            <option value="KSI">Kumasi</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">Profession</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="profession">
+                                            <option value="ACC">Financial Accountant</option>
+                                            <option value="KSI">Civil Engineer</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% csrf_token %}
+
+                    <div class="columns">
+                        <div class="column">
+                            <div class="field">
+                                <label for="name" class="label">Phone Number 1</label>
+                                <input class="input" name="phone_1" type="text">
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <label for="name" class="label">Phone Number 2 (Optional)</label>
+                                <input class="input" name="phone_2" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Address</label>
+                        <input type="text" class="input" placeholder="Address line 1">
+                        <input type="text" class="input" placeholder="Address line 2">
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="whatsapp">Whatsapp</label>
+                        <input class="input" id="whatsapp" type="text" placeholder="Optional" name="whatsapp">
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="facebook">Facebook username</label>
+                        <input class="input" id="facebook" type="text" placeholder="(Optional) Eg. kofi.duodu" name="facebook">
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="twitter">Twitter</label>
+                        <input class="input" id="twitter" type="text" placeholder="Optional" name="twitter">
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="instagram">Instagram</label>
+                        <input class="input" id="instagram" type="text" placeholder="Optional" name="instagram">
+                    </div>
+
+                    <div class="columns">
+                        <div class="column">
+                            <label for="" class="label">Reference 1</label>
+                            <input class="input" name="ref_1_n" type="text" placeholder="Full name">
+                            <input class="input" name="ref_1_y" type="text" placeholder="Year of completion">
+                            <input class="input" name="ref_1_h" type="text" placeholder="House">
+                        </div>
+                        <div class="column">
+                            <label for="" class="label">Reference 2</label>
+                            <input class="input" name="ref_2_n" type="text" placeholder="Full name">
+                            <input class="input" name="ref_2_y" type="text" placeholder="Year of completion">
+                            <input class="input" name="ref_2_h" type="text" placeholder="House">
+                        </div>
+                    </div>
+
+                    <br>
+                    <button class="button is-primary">Submit Registration</button>
+                </form>
             </div>
         </div>
     </div>
-{% endblock content %}
+</div>
+{% endblock content %} {% block main_title %} Register {% endblock main_title %}
