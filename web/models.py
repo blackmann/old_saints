@@ -5,10 +5,16 @@ from django.db import models
 class House(models.Model):
     name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
 
 class Chapter(models.Model):
     name = models.CharField(max_length=50)
     code = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.name
 
 
 class Alumnum(models.Model):
@@ -28,10 +34,13 @@ class Alumnum(models.Model):
     member_id = models.CharField(max_length=20)
     profession = models.CharField(max_length=100)
 
-    reference_1 = models.TextField()
-    reference_2 = models.TextField()
+    reference_1 = models.TextField(blank=True)
+    reference_2 = models.TextField(blank=True)
     
     verified = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.get_full_name()
 
 
 class Dues(models.Model):

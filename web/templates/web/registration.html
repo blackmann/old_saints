@@ -10,17 +10,21 @@
             <div class="column container is-fluid">
                 <h3 class="title">Finish Up</h3>
                 <form action={% url 'web:register' %} method="post">
+
+                    {% if error %}
+                    <p class="is-danger help">{{error}}</p>
+                    {% endif %}
                     <div class="columns">
                         <div class="column">
                             <div class="field">
                                 <label for="name" class="label">First Name</label>
-                                <input class="input" name="first_name" type="text" value="{{ pre_form.f }}">
+                                <input class="input" name="first_name" type="text" value="{{ first_name }}">
                             </div>
                         </div>
                         <div class="column">
                             <div class="field">
                                 <label for="name" class="label">Last Name</label>
-                                <input class="input" name="last_name" type="text" value="{{ pre_form.l }}">
+                                <input class="input" name="last_name" type="text" value="{{ last_name }}">
                             </div>
                         </div>
                     </div>
@@ -28,7 +32,7 @@
                     <div class="field">
                         <label class="label">Email</label>
                         <div class="control has-icons-left has-icons-right">
-                            <input class="input" type="email" value="{{ pre_form.e }}" name="email" placeholder="Email input" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                            <input class="input" type="email" value="{{ email }}" name="email" placeholder="Email input" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
                             <span class="icon is-small is-left">
                                 <i class="fas fa-envelope"></i>
                             </span>
@@ -57,8 +61,9 @@
                                 <div class="control">
                                     <div class="select">
                                         <select name="house">
-                                            <option>Obiri Yeboah</option>
-                                            <option>Opuni Ato</option>
+                                            {% for h in houses %}
+                                            <option {% if h == house %} selected {% endif %}>{{h}}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>
@@ -66,18 +71,11 @@
                         </div>
                     </div>
                     <div class="control">
+                        {% for et in exam_types %}
                         <label class="radio">
-                            <input type="radio" name="exam_type" checked> O'Level
+                            <input type="radio" value="{{et}}" name="exam_type" {% if et == exam_type %}checked{% endif %}> {{et}}
                         </label>
-                        <label class="radio">
-                            <input type="radio" name="exam_type"> A'Level
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="exam_type"> SSSCE
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="exam_type"> WASSCE
-                        </label>
+                        {% endfor %}
                     </div>
                     <br>
                     <div class="columns">
@@ -87,8 +85,9 @@
                                 <div class="control">
                                     <div class="select">
                                         <select name="chapter">
-                                            <option value="ACC">Accra</option>
-                                            <option value="KSI">Kumasi</option>
+                                            {% for ch in chapters %}
+                                            <option value="{{ch}}" {% if ch == chapter %}selected{% endif%}>{{ch}}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>
@@ -115,21 +114,21 @@
                         <div class="column">
                             <div class="field">
                                 <label for="name" class="label">Phone Number 1</label>
-                                <input class="input" name="phone_1" type="text">
+                                <input class="input" name="phone_1" type="text" value="{% if phone_1 %}{{phone_1}}{% endif %}">
                             </div>
                         </div>
                         <div class="column">
                             <div class="field">
                                 <label for="name" class="label">Phone Number 2 (Optional)</label>
-                                <input class="input" name="phone_2" type="text">
+                                <input class="input" name="phone_2" type="text" value="{% if phone_2 %}{{phone_2}}{% endif %}">
                             </div>
                         </div>
                     </div>
 
                     <div class="field">
                         <label class="label">Address</label>
-                        <input type="text" class="input" placeholder="Address line 1">
-                        <input type="text" class="input" placeholder="Address line 2">
+                        <input type="text" name="addr_line_1" class="input" placeholder="Address line 1" value="{% if address_line_1 %}{{address_line_1}}{% endif %}">
+                        <input type="text" name="addr_line_2" class="input" placeholder="Address line 2" value="{% if address_line_2 %}{{address_line_2}}{% endif %}">
                     </div>
 
                     <div class="field">
@@ -155,16 +154,21 @@
                     <div class="columns">
                         <div class="column">
                             <label for="" class="label">Reference 1</label>
-                            <input class="input" name="ref_1_n" type="text" placeholder="Full name">
-                            <input class="input" name="ref_1_y" type="text" placeholder="Year of completion">
-                            <input class="input" name="ref_1_h" type="text" placeholder="House">
+                            <input class="input" name="ref_1_n" type="text" placeholder="Full name" value="{% if ref_1_name %}{{ref_1_name}}{% endif %}">
+                            <input class="input" name="ref_1_y" type="text" placeholder="Year of completion" value="{% if ref_1_y %}{{ref_1_y}}{% endif %}">
+                            <input class="input" name="ref_1_h" type="text" placeholder="House" value="{% if ref_1_h %}{{ref_1_h}}{% endif %}">
                         </div>
                         <div class="column">
                             <label for="" class="label">Reference 2</label>
-                            <input class="input" name="ref_2_n" type="text" placeholder="Full name">
-                            <input class="input" name="ref_2_y" type="text" placeholder="Year of completion">
-                            <input class="input" name="ref_2_h" type="text" placeholder="House">
+                            <input class="input" name="ref_2_n" type="text" placeholder="Full name" value="{% if ref_2_name %}{{ref_2_name}}{% endif %}">
+                            <input class="input" name="ref_2_y" type="text" placeholder="Year of completion" value="{% if ref_2_y %}{{ref_2_y}}{% endif %}">
+                            <input class="input" name="ref_2_h" type="text" placeholder="House" value="{% if ref_2_h %}{{ref_2_h}}{% endif %}">
                         </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="password" class="label">Password</label>
+                        <input class="input" type="password" name="password" placeholder="Set a password">
                     </div>
 
                     <br>
