@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth import login
 
 import datetime
 
@@ -148,10 +149,11 @@ def register(request):
 
         if not error:
             # create user
-            user = User.objects.create(email=context['email'],
-                                       first_name=context['first_name'],
-                                       last_name=context['last_name'],
-                                       password=context['password'])
+            user = User.objects.create_user(email=context['email'],
+                                            username=context['email'].replace('@', '_'),
+                                            first_name=context['first_name'],
+                                            last_name=context['last_name'],
+                                            password=context['password'])
 
             chapter = Chapter.objects.get(name=context['chapter'])
             house = House.objects.get(name=context['house'])
@@ -216,3 +218,26 @@ def create_job(request):
         if job_post:
             return redirect('web:jobs')
     return render(request, "web/create_job.html", context)
+
+
+def login_view(request):
+
+    context = dict()
+
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+
+        try:
+            user = User.objects.get(email=email)
+            if user.check_password(password):
+                login(request, user)
+                return redirect(request.GET.get('next', None) or 'web:home')
+
+            else:
+                context['error'] = "The email/password combination is incorrect."
+        
+        except User.DoesNotExist:
+            context['error'] = "The email/password combination is incorrect."
+
+    return render(request, 'web/login.html', context)

@@ -34,9 +34,15 @@
                     <a href="">Polls</a>
                 </div>
 
-                <div class="navbar-item">
-                    <a href="">Log in</a>
-                </div>
+                {% if user.is_authenticated %}
+                    <div class="navbar-item">
+                        <a href="">{{user.get_full_name}}</a>
+                    </div>
+                {% else %}
+                    <div class="navbar-item">
+                        <a href="{% url 'web:login' %}">Log in</a>
+                    </div>
+                {% endif %}
             </div>
         </nav>
     </header>
