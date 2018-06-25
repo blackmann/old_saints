@@ -1,0 +1,88 @@
+{% extends "web/base.html" %} {% block main_title %} Create Job Post {% endblock main_title %} {% block content %}
+<div class="container centered-div">
+    <p class="title is-1">Create New
+        <br> Job Post</p>
+    <p>Please fill in all the fields below</p>
+    <br>
+
+    <form action="{% url 'web:create_job_post' %}" method="POST">
+        <div class="field">
+            <label class="label">Post Title</label>
+            <div class="control">
+                <input class="input" name="title" type="text" placeholder="Short header for this job post">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Job Position</label>
+            <div class="control">
+                <input class="input" name="position" type="text" placeholder="Short header for this job post">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Short Description</label>
+            <div class="control">
+                <textarea class="textarea" name="short_description" placeholder="Short header for this job post"></textarea>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Job Description</label>
+            <div class="control">
+                <textarea class="textarea" name="job_description" placeholder="Provide full details of the job."></textarea>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Company</label>
+            <div class="control">
+                <input class="input" name="company" type="text">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Location</label>
+            <div class="control">
+                <input class="input" name="location" type="text" style="width: 300px;">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Qualifications</label>
+            <div class="control">
+                <input class="input" name="qualifications" type="text">
+            </div>
+        </div>
+
+        <div class="control">
+            <label for="" class="label">Salary Range (GHS)</label>
+            <div class="select">
+                <select name="salary">
+                    <option value="0">1,000-2,000</option>
+                    <option value="1">2,000-5,000</option>
+                    <option value="2">5,000-10,000</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Deadline</label>
+            <div class="control">
+                <input class="input" name="deadline" type="text" placeholder="DD/MM/YYYY" style="width: 200px">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">How to Apply</label>
+            <div class="control">
+                <input class="input" name="hta" type="text">
+            </div>
+        </div>
+
+        {% csrf_token %}
+
+        <button class="button is-info" type="submit" style="margin-bottom: 2em;">Submit</button>
+    </form>
+</div>
+{% endblock content %}

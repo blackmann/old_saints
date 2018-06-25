@@ -48,3 +48,20 @@ class Dues(models.Model):
     amount = models.DecimalField(default=0.0, max_digits=10, decimal_places=2)
     date_paid = models.DateField(auto_now=True)
 
+
+class Job(models.Model):
+    post_title = models.CharField(max_length=70)
+    position = models.CharField(max_length=70)
+    short_description = models.CharField(max_length=250)
+    job_description = models.TextField()
+    salary_range = models.CharField(max_length=60)
+    location = models.CharField(max_length=70)
+    company = models.CharField(max_length=70)
+    how_to_apply = models.CharField(max_length=70)
+    date_added = models.DateTimeField(auto_now_add=True)
+    qualifications = models.CharField(max_length=100)
+    deadline = models.DateField()
+    posted_by = models.ForeignKey(Alumnum, related_name="jobs", on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ('-date_added', )

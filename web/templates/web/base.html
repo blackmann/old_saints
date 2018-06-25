@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block main_title %} {% endblock %} | Old Saints</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+    <link rel="stylesheet" href="{% static 'web/css/main.css' %}">
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 </head>
 
@@ -21,7 +23,7 @@
 
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <a href="">Jobs</a>
+                    <a href={% url 'web:jobs' %}>Jobs</a>
                 </div>
 
                 <div class="navbar-item">
@@ -40,6 +42,10 @@
     </header>
 
     {% block content %} {% endblock content %}
+
+    <footer class="container">
+
+    </footer>
 </body>
 
 </html>

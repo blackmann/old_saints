@@ -1,7 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 
-from web.models import Alumnum, Chapter, House
+import datetime
+
+from web.models import Alumnum, Chapter, House, Job
+
+
+SALARIES = ['1000-2000', '2000-5000', '5000-10000', ]
 
 
 def get_chapters():
@@ -12,6 +17,18 @@ def get_houses():
 
 def get_exam_types():
     return ["O'Level", "A'Level", "SSSCE", "WASSCE", ]
+
+
+def get_date(date_str):
+    """
+    Convert date in the form mm/dd/yyyy to date object
+    """
+    split_date = [int(val) for val in date_str.split('/')]
+    
+    return datetime.date(day=split_date[0],
+                      month=split_date[1],
+                      year=split_date[2])
+
 
 
 def clean_registration_form(request, all=False):
@@ -55,6 +72,8 @@ def home(request):
     context['first_name'] = ""
     context['last_name'] = ""
     context['email'] = ""
+    context['houses'] = get_houses()
+    context['house'] = ''
 
     if request.method == "POST":
         # check for the important stuffs
@@ -160,3 +179,40 @@ def register(request):
 
 def done(request):
     return render(request, "web/registration_complete.html")
+
+
+def jobs(request):
+    context = {
+        "jobs": Job.objects.all()
+    }
+    return render(request, "web/jobs.html", context)
+
+
+def create_job(request):
+    context  = dict()
+    title = context['title'] = request.POST.get('title', '')
+    position = context['position'] = request.POST.get('position', '')
+    s_description = context['short_description'] = request.POST.get('short_description', '')
+    j_description = context['job_description'] = request.POST.get('job_description', '')
+    company = context['company'] = request.POST.get('company', '')
+    location = context['location'] = request.POST.get('location', '')
+    qualification = context['qualification'] = request.POST.get('qualification', '')
+    salary_range = context['salary_range'] = request.POST.get('salary', '')
+    deadline = context['deadline'] = request.POST.get('deadline', '')
+    hta = context['hta'] = request.POST.get('hta', '')
+
+    if request.method == 'POST':
+        job_post = Job.objects.create(post_title=title,
+                                      position=position,
+                                      short_description=s_description,
+                                      job_description=j_description,
+                                      salary_range=SALARIES[int(salary_range)],
+                                      location=location,
+                                      company=company,
+                                      how_to_apply=hta,
+                                      qualifications=qualification,
+                                      deadline=get_date(deadline),
+                                      posted_by=Alumnum.objects.get(pk=1))
+        if job_post:
+            return redirect('web:jobs')
+    return render(request, "web/create_job.html", context)

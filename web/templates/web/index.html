@@ -62,8 +62,9 @@
                                 <div class="control">
                                     <div class="select">
                                         <select name="house">
-                                            <option>Obiri Yeboah</option>
-                                            <option>Opuni Ato</option>
+                                            {% for h in houses %}
+                                            <option {% if h == house %} selected {% endif %}>{{h}}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>

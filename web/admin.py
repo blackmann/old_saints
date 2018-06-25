@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from web.models import Chapter, Alumnum, House, Dues
+from web.models import Chapter, Alumnum, House, Dues, Job
 
 app_name = "web"
 
-admin.site.register((Chapter, Alumnum, House, Dues, ))
+admin.site.register((Chapter, Alumnum, House, Dues, Job, ))
