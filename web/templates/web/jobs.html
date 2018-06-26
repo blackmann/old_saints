@@ -19,7 +19,7 @@
         <p class="is-6 title">Deadline: {{job.deadline}}</p>
         <div class="columns">
             <div class="column">
-                <a class="button is-small">Details &amp; How to Apply</a>
+                <a class="button is-small" href="{% url 'web:job_detail' job.id %}">Details &amp; How to Apply</a>
             </div>
             <div class="column">
                 <p class="has-text-grey-light" style="font-size: 10pt;">Posted by {{job.posted_by}} {{job.date_added|timesince}} ago</p>

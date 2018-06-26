@@ -1,0 +1,28 @@
+{% extends "web/base.html" %}
+{% block main_title %}
+Job
+{% endblock main_title %}
+
+{% block content %}
+    <div class="container centered-div" style="margin-top: 3em;">
+        <p class="is-3 title">{{job.post_title}}</p>
+        <p>{{job.company}} &bull; {{job.location}}</p>
+
+        <p class="is-5 title" style="margin-top: 2em;">Details</p>
+        <p>{{job.job_description}}</p>
+
+        <p class="is-5 title" style="margin-top: 2em;">Qualifications</p>
+        <p>{{job.qualifications}}</p>
+
+        <p class="is-5 title" style="margin-top: 2em;">Salary Range</p>
+        <p>{{job.salary_range}}</p>
+
+        <p class="is-5 title" style="margin-top: 2em;">How to apply</p>
+        <p>{{job.how_to_apply}}</p>
+
+        <p class="is-5 title" style="margin-top: 2em;">Deadline</p>
+        <p>{{job.deadline}}</p>
+
+        <p style="margin-top: 3em;"></p>
+    </div>
+{% endblock content %}

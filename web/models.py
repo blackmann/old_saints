@@ -65,3 +65,18 @@ class Job(models.Model):
 
     class Meta:
         ordering = ('-date_added', )
+
+    def __str__(self):
+        return self.post_title
+
+
+class Scholarship(models.Model):
+    posted_by = models.ForeignKey(Alumnum, related_name="scholarships", on_delete=models.CASCADE)
+    title = models.CharField(max_length=70)
+    school = models.CharField(max_length=70)
+    description = models.TextField()
+    posted_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+

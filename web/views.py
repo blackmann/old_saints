@@ -198,7 +198,7 @@ def create_job(request):
     j_description = context['job_description'] = request.POST.get('job_description', '')
     company = context['company'] = request.POST.get('company', '')
     location = context['location'] = request.POST.get('location', '')
-    qualification = context['qualification'] = request.POST.get('qualification', '')
+    qualifications = context['qualifications'] = request.POST.get('qualifications', '')
     salary_range = context['salary_range'] = request.POST.get('salary', '')
     deadline = context['deadline'] = request.POST.get('deadline', '')
     hta = context['hta'] = request.POST.get('hta', '')
@@ -212,7 +212,7 @@ def create_job(request):
                                       location=location,
                                       company=company,
                                       how_to_apply=hta,
-                                      qualifications=qualification,
+                                      qualifications=qualifications,
                                       deadline=get_date(deadline),
                                       posted_by=Alumnum.objects.get(pk=1))
         if job_post:
@@ -241,3 +241,10 @@ def login_view(request):
             context['error'] = "The email/password combination is incorrect."
 
     return render(request, 'web/login.html', context)
+
+
+def job_detail(request, job_id):
+    context = {
+        'job': Job.objects.get(pk=job_id)
+    }
+    return render(request, 'web/job_detail.html', context)
