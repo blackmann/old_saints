@@ -14,43 +14,125 @@
 
 <body>
     <header>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
+        <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href={% url 'web:home' %}>
-                    <strong>OLD SAINTS</strong>
+                <a class="navbar-item" href="/">
+                    <img src="{% static 'web/images/oldsaints-01.png' %}" alt="Old Saints" width="20" height="20"> &nbsp;Old Saints
                 </a>
             </div>
 
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <a href={% url 'web:jobs' %}>Jobs</a>
-                </div>
-
-                <div class="navbar-item">
-                    <a href="">Schorlaships</a>
-                </div>
-
-                <div class="navbar-item">
-                    <a href="">Polls</a>
-                </div>
-
-                {% if user.is_authenticated %}
-                    <div class="navbar-item">
-                        <a href="">{{user.get_full_name}}</a>
+            <div class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item" href="">
+                        Find Mate
+                    </a>
+                    <a class="navbar-item" href="{% url 'web:scholarships' %}">
+                        Scholarships
+                    </a>
+                    <a class="navbar-item" href="{% url 'web:jobs' %}">
+                        Jobs
+                    </a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Updates
+                        </a>
+                        <div class="navbar-dropdown is-boxed">
+                            <a class="navbar-item" href="">
+                                Gallery
+                            </a>
+                            <a class="navbar-item" href="">
+                                Projects
+                            </a>
+                            <a class="navbar-item" href="">
+                                Events
+                            </a>
+                        </div>
                     </div>
-                {% else %}
-                    <div class="navbar-item">
-                        <a href="{% url 'web:login' %}">Log in</a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Payments
+                        </a>
+                        <div class="navbar-dropdown is-boxed">
+                            <a class="navbar-item" href="">
+                                Contributions
+                            </a>
+                            <a class="navbar-item" href="">
+                                Projects
+                            </a>
+                            <a class="navbar-item" href="">
+                                Dues
+                            </a>
+                        </div>
                     </div>
-                {% endif %}
+                    <a class="navbar-item" href="{% url 'web:login' %}">
+                        Log in
+                    </a>
+                </div>
             </div>
         </nav>
     </header>
 
+    <div class="notification is-danger" style="width: 60%; margin-left: auto; margin-right: auto; margin-top: 10px;">
+        <button class="delete"></button>
+        Site is still under construction. All features are not fully developed.
+    </div>
+
     {% block content %} {% endblock content %}
 
-    <footer class="container">
+    <footer>
+        <div class="columns">
+            <div class="column">
+                <h4 class="is-size-5 has-text-weight-semibold  has-text-grey-darker">Old Saints</h4>
+                <ul>
+                    <li>
+                        <a href="" class="has-text-grey">About</a>
+                    </li>
+                    <li>
+                        <a href="" class="has-text-grey">Gallery</a>
+                    </li>
+                    <li>
+                        <a href="" class="has-text-grey">Global Executives</a>
+                    </li>
+                    <li>
+                        <a href="" class="has-text-grey">Projects</a>
+                    </li>
+                </ul>
+            </div>
 
+            <div class="column">
+                <h4 class="is-size-5 has-text-weight-semibold  has-text-grey-darker">Posts</h4>
+                <ul>
+                    <li>
+                        <a href="" class="has-text-grey">Jobs</a>
+                    </li>
+                    <li>
+                        <a href="" class="has-text-grey">Scholarships</a>
+                    </li>
+                    <li>
+                        <a href="" class="has-text-grey">Gallery</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="column">
+                <h4 class="is-size-5 has-text-weight-semibold  has-text-grey-darker">Social</h4>
+                <ul>
+                    <li>
+                        <a href="" class="has-text-grey">Find Mate</a>
+                    </li>
+                    <li>
+                        <a href="" class="has-text-grey">Gallery</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="column">
+
+            </div>
+        </div>
+
+        <br>
+        <br> &copy; Copyright 2018. Old Saints
     </footer>
 </body>
 

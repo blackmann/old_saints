@@ -8,7 +8,7 @@
             </div>
 
             <div class="column container is-fluid">
-                <h3 class="title">Finish Up</h3>
+                <h3 class="title">Complete Registration</h3>
                 <form action={% url 'web:register' %} method="post">
 
                     {% if error %}
@@ -28,6 +28,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="field"><label for="nickname" class="label">Nickname</label><input class="input" type="text"></div>
 
                     <div class="field">
                         <label class="label">Email</label>

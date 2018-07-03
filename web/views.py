@@ -4,7 +4,7 @@ from django.contrib.auth import login
 
 import datetime
 
-from web.models import Alumnum, Chapter, House, Job
+from web.models import Alumnum, Chapter, House, Job, Scholarship
 
 
 SALARIES = ['1000-2000', '2000-5000', '5000-10000', ]
@@ -248,3 +248,15 @@ def job_detail(request, job_id):
         'job': Job.objects.get(pk=job_id)
     }
     return render(request, 'web/job_detail.html', context)
+
+
+def scholarships(request):
+    context = {
+        'scholarships': Scholarship.objects.all()
+    }
+    return render(request, 'web/scholarships.html', context)
+
+
+def create_scholarship(request):
+
+    return render(request, 'web/create_scholarship.html')

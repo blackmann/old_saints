@@ -1,5 +1,20 @@
 .centered-div {
-    width: 55%; 
+    width: 45%; 
     margin-left: auto; 
     margin-right: auto;
+}
+
+.hero-home {
+    background-image: url('/static/web/images/herobg.jpg');
+    background-size: cover;
+}
+
+.hero-home p {
+    color: white;
+}
+
+footer {
+    margin-top: 4em;
+    padding: 5em;
+    background: #eee
 }

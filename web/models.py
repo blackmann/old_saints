@@ -33,6 +33,7 @@ class Alumnum(models.Model):
     chapter = models.ForeignKey(Chapter, related_name="alumni", on_delete=models.CASCADE)
     member_id = models.CharField(max_length=20)
     profession = models.CharField(max_length=100)
+    nickname = models.CharField(max_length=70, blank=True)
 
     reference_1 = models.TextField(blank=True)
     reference_2 = models.TextField(blank=True)
@@ -76,6 +77,7 @@ class Scholarship(models.Model):
     school = models.CharField(max_length=70)
     description = models.TextField()
     posted_on = models.DateTimeField(auto_now_add=True)
+    how_to_apply = models.CharField(max_length=70)
 
     def __str__(self):
         return self.title

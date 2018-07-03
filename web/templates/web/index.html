@@ -1,83 +1,16 @@
 {% extends "web/base.html" %} {% block main_title %} Home {% endblock main_title %} {% block content %}
-<div class="hero">
+<div class="hero hero-home">
     <div class="hero-body">
+        <p class="title is-1">Welcome to <br>OSA</p>
+        <p class="is-size-5"> <br> This is where you reconnect with your old school mates and network. You <br> could also find jobs and 
+        scholarships. To be able to access this experience please <br> log in or register. <br><br><br></p>
 
-        <div class="columns">
-            <div class="column container is-fluid">
-                <h1 class="title is-1">Welcome to
-                    <br> Old Saints Old Students site.</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis assumenda, cupiditate, pariatur debitis
-                    corrupti repellendus </p>
-            </div>
-            <div class="column container is-fluid">
-                <h3 class="title">Register</h3>
-                <form action={% url 'web:home'  %} method="post">
-                    {% if error %}
-                    <p class="help is-danger">{{ error }}</p>
-                    {% endif %}
-                    <div class="columns">
-                        <div class="column">
-                            <div class="field">
-                                <label for="name" class="label">First Name</label>
-                                <input class="input" name="first_name" type="text" value="{{first_name}}">
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div class="field">
-                                <label for="name" class="label">Last Name</label>
-                                <input class="input" name="last_name" type="text" value="{{last_name}}">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label class="label">Email</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input class="input" type="email" name="email" placeholder="Email input" value="{{email}}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-envelope"></i>
-                            </span>
-                        </div>
-                        {% comment %}
-                        <p class="help is-danger">This email is invalid</p> {% endcomment %}
-                    </div>
-
-                    <div class="columns">
-                        <div class="column">
-                            <div class="field">
-                                <label class="label">Year of Completion</label>
-                                <div class="control">
-                                    <div class="select">
-                                        <select name="year_of_completion">
-                                            <option value="1990">1990</option>
-                                            <option value="1991">1991</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div class="field">
-                                <label class="label">House</label>
-                                <div class="control">
-                                    <div class="select">
-                                        <select name="house">
-                                            {% for h in houses %}
-                                            <option {% if h == house %} selected {% endif %}>{{h}}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% csrf_token %}
-
-                    <button class="button is-primary">Complete Registration</button>
-                    <p class="is-size-7"><br> You will need to provide two references in order for your registration to be verified. Click Complete Registration to proceed.</p>
-                </form>
-            </div>
-        </div>
+        <a href="{% url 'web:login' %}" class="button is-rounded is-warning">Log in</a><br><br>
+        <a href="{% url 'web:register' %}" class="has-text-white" style="text-decoration: underline;">Register if you do not have an account</a>
     </div>
 </div>
+
+<section class="meta">
+    
+</section>
 {% endblock content %}
