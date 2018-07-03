@@ -25,7 +25,7 @@ SECRET_KEY = 'ok@d_j6x5q^$n52x85p%^3u!#30od!yz5_wziv@o4-+8pp0d=='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['osaapp.herokuapp.com', ]
+ALLOWED_HOSTS = ['osaapp.herokuapp.com', 'localhost', ]
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -121,3 +122,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = (os.path.join(BASE_DIR, 'static'))
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

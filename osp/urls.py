@@ -24,6 +24,4 @@ from osp import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('web.urls', namespace='web')),
-    url(r'^static/(?P<path>.*)$', serve, {
-        'document_root': settings.STATIC_ROOT, }),
 ]
