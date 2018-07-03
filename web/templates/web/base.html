@@ -64,9 +64,30 @@
                             </a>
                         </div>
                     </div>
+                    {% if user.is_authenticated %} 
+                    {% if user.is_superuser %}
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            {{user.get_full_name}}
+                        </a>
+                        <div class="navbar-dropdown is-boxed">
+                            <a class="navbar-item" href="/admin">
+                                Admin Site
+                            </a>
+                            <a class="navbar-item" href="">
+                                Profile
+                            </a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <a class="navbar-item" href="">
+                        {{user.get_full_name}}
+                    </a>
+                    {% endif %} {% else %}
                     <a class="navbar-item" href="{% url 'web:login' %}">
                         Log in
                     </a>
+                    {% endif %}
                 </div>
             </div>
         </nav>
@@ -80,7 +101,7 @@
     <div class="content-block">
         {% block content %} {% endblock content %}
     </div>
-    
+
 
     <footer>
         <div class="columns">
