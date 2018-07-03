@@ -17,6 +17,11 @@ class AlumnumModelAdmin(admin.ModelAdmin):
 class JobModelAdmin(admin.ModelAdmin):
     list_display = ('post_title', 'posted_by', )
 
-admin.site.register((Chapter, House, Dues, Scholarship, ))
+
+@admin.register(Dues)
+class DuesModelAdmin(admin.ModelAdmin):
+    list_display = ('alumnum', 'amount', 'for_how_many_months', 'date_paid', )
+
+admin.site.register((Chapter, House, Scholarship, ))
 
 admin.site.site_header = "Old Saints Administration"

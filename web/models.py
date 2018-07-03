@@ -58,6 +58,8 @@ class Dues(models.Model):
     alumnum = models.ForeignKey(Alumnum, related_name="dues", on_delete=models.CASCADE)
     amount = models.DecimalField(default=0.0, max_digits=10, decimal_places=2)
     date_paid = models.DateField(auto_now=True)
+    for_how_many_months = models.PositiveIntegerField(default=1)
+    year = models.PositiveIntegerField(default=2018)
 
     class Meta:
         verbose_name_plural = "Dues"
