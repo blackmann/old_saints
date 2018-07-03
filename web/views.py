@@ -260,3 +260,8 @@ def scholarships(request):
 def create_scholarship(request):
 
     return render(request, 'web/create_scholarship.html')
+
+
+def find_mate(request):
+
+    return render(request, "web/find_mate.html")

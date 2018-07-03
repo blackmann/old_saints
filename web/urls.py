@@ -13,7 +13,8 @@ urlpatterns = [
     url(r'^login/$', views.login_view, name="login"),
     url(r'^jobs/(?P<job_id>\d+)/$', views.job_detail, name="job_detail"),
     url(r'^scholarships/$', views.scholarships, name="scholarships"), 
-    url(r'^scholarship/create/$', views.create_scholarship, name="create_scholarship_post")
+    url(r'^scholarship/create/$', views.create_scholarship, name="create_scholarship_post"),
+    url(r'^find-mate/$', views.find_mate, name="find_mate",)
 ]
 
 app_name = 'web'
