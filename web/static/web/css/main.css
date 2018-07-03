@@ -27,3 +27,7 @@ footer {
 .content-block {
     min-height: 100vh;
 }
+
+.hero-body {
+    min-height: 70vh;
+}

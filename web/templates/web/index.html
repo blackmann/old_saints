@@ -1,16 +1,40 @@
-{% extends "web/base.html" %} {% block main_title %} Home {% endblock main_title %} {% block content %}
+{% extends "web/base.html" %} 
+{% load static %}
+{% block main_title %} Home {% endblock main_title %} {% block content %}
 <div class="hero hero-home">
     <div class="hero-body">
-        <p class="title is-1">Welcome to <br>OSA</p>
-        <p class="is-size-5"> <br> This is where you reconnect with your old school mates and network. You <br> could also find jobs and 
-        scholarships. To be able to access this experience please <br> log in or register. <br><br><br></p>
+        <div class="columns">
+            <div class="column">
+                <p class="title is-1">Welcome to
+                    <br>Old Saints</p>
+                <p class="is-size-5">
+                    <br> This is where you reconnect with your old school mates and network. You
+                    <br> could also find jobs and scholarships. 
+                    {% if not user.is_authenticated %}
+                    To be able to access this experience please log in or register.
+                    {% else %}
+                    {% endif %}
+                </p>
+            </div>
 
-        <a href="{% url 'web:login' %}" class="button is-rounded is-warning">Log in</a><br><br>
+            <div class="column" style="padding-left: 30px;">
+                <img src="{% static 'web/images/oldsaints-01.png' %}" alt="" style="float: right;">
+            </div>
+        </div>
+
+        {% if not user.is_authenticated %}
+        <a href="{% url 'web:login' %}" class="button is-rounded is-warning">Log in</a>
+        <br>
+        <br>
         <a href="{% url 'web:register' %}" class="has-text-white" style="text-decoration: underline;">Register if you do not have an account</a>
+
+        {% else %} 
+        <a href="{% url 'web:login' %}" class="button is-rounded is-warning">Find Jobs</a>
+        {% endif %}
     </div>
 </div>
 
 <section class="meta">
-    
+
 </section>
 {% endblock content %}

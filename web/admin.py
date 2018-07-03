@@ -20,7 +20,7 @@ class JobModelAdmin(admin.ModelAdmin):
 
 @admin.register(Dues)
 class DuesModelAdmin(admin.ModelAdmin):
-    list_display = ('alumnum', 'amount', 'for_how_many_months', 'date_paid', )
+    list_display = ('alumnum', 'amount', 'for_how_many_months', 'year', 'date_paid', )
 
 admin.site.register((Chapter, House, Scholarship, ))
 
