@@ -24,7 +24,7 @@
             <div class="navbar-menu">
                 <div class="navbar-end">
                     <a class="navbar-item" href="{% url 'web:find_mate' %}">
-                        Find Mate
+                        Find Colleague
                     </a>
                     <a class="navbar-item" href="{% url 'web:scholarships' %}">
                         Scholarships
@@ -77,7 +77,10 @@
         Site is still under construction. All features are not fully developed.
     </div>
 
-    {% block content %} {% endblock content %}
+    <div class="content-block">
+        {% block content %} {% endblock content %}
+    </div>
+    
 
     <footer>
         <div class="columns">
@@ -122,6 +125,12 @@
                     </li>
                     <li>
                         <a href="" class="has-text-grey">Gallery</a>
+                    </li>
+                    <li>
+                        <a href="" class="has-text-grey">Facebook</a>
+                    </li>
+                    <li>
+                        <a href="" class="has-text-grey">Twitter</a>
                     </li>
                 </ul>
             </div>

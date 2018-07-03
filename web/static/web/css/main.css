@@ -18,3 +18,12 @@ footer {
     padding: 5em;
     background: #eee
 }
+
+.inline-fields {
+    float: left;
+    margin-right: 5px;
+}
+
+.content-block {
+    min-height: 100vh;
+}

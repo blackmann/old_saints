@@ -19,11 +19,11 @@ Scholarships
             <span class="icon">
                 <i class="fas fa-building"></i>
             </span>{{ scholarship.school }}</p>
-        <p>{{ scholarship.description }}</p>
+        <p>{{ scholarship.description|truncatechars:250 }}</p>
         <br>
         <div class="columns">
             <div class="column">
-                <a class="button is-small" href="">Details &amp; How to Apply</a>
+                <a class="button is-small" href="{% url 'web:scholarship_detail' scholarship.id %}">More &amp; How to Apply</a>
             </div>
             <div class="column">
                 <p class="has-text-grey-light" style="font-size: 10pt;">Posted by {{scholarship.posted_by}}</p>

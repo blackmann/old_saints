@@ -263,5 +263,24 @@ def create_scholarship(request):
 
 
 def find_mate(request):
+    context = {
+        'houses': House.objects.all(),
+        'chapters': Chapter.objects.all()
+    }
 
-    return render(request, "web/find_mate.html")
+    if request.GET.get('s', None) == '1':
+        context['results'] = Alumnum.objects.all()[:10]
+
+    print(context)
+
+    return render(request, "web/find_mate.html", context)
+
+
+def scholarship_detail(request, scholarship_id):
+    scholarship = Scholarship.objects.get(pk=scholarship_id)
+
+    context = {
+        'scholarship': scholarship
+    }
+
+    return render(request, 'web/scholarship_detail.html', context)
