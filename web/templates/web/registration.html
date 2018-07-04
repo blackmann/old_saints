@@ -1,10 +1,10 @@
 {% extends "web/base.html" %} {% block content %}
+{% load static %}
 <div class="hero">
     <div class="hero-body">
         <div class="columns">
             <div class="column is-fluid">
-                <h1 class="title is-1">Complete
-                    <br> Registration</h1>
+                <img src="{% static 'web/images/band.jpg' %}"  alt="">
             </div>
 
             <div class="column container is-fluid">
@@ -29,7 +29,7 @@
                         </div>
                     </div>
 
-                    <div class="field"><label for="nickname" class="label">Nickname</label><input class="input" type="text"></div>
+                    <div class="field"><label for="nickname" class="label">Nickname</label><input value="{{nickname}}" name="nickname" class="input" type="text" placeholder="Optional"></div>
 
                     <div class="field">
                         <label class="label">Email</label>
@@ -156,15 +156,17 @@
                     <div class="columns">
                         <div class="column">
                             <label for="" class="label">Reference 1</label>
-                            <input class="input" name="ref_1_n" type="text" placeholder="Full name" value="{% if ref_1_name %}{{ref_1_name}}{% endif %}">
-                            <input class="input" name="ref_1_y" type="text" placeholder="Year of completion" value="{% if ref_1_y %}{{ref_1_y}}{% endif %}">
-                            <input class="input" name="ref_1_h" type="text" placeholder="House" value="{% if ref_1_h %}{{ref_1_h}}{% endif %}">
+                            <input class="input" name="ref_1_n" type="text" placeholder="Full name" value="{{ref_1_name}}">
+                            <input class="input" name="ref_1_y" type="text" placeholder="Year of completion" value="{{ref_1_y}}">
+                            <input class="input" name="ref_1_h" type="text" placeholder="House" value="{{ref_1_h}}">
+                            <input class="input" name="ref_1_p" type="tel" placeholder="Phone" value="{{ref_1_p}}">
                         </div>
                         <div class="column">
                             <label for="" class="label">Reference 2</label>
-                            <input class="input" name="ref_2_n" type="text" placeholder="Full name" value="{% if ref_2_name %}{{ref_2_name}}{% endif %}">
-                            <input class="input" name="ref_2_y" type="text" placeholder="Year of completion" value="{% if ref_2_y %}{{ref_2_y}}{% endif %}">
-                            <input class="input" name="ref_2_h" type="text" placeholder="House" value="{% if ref_2_h %}{{ref_2_h}}{% endif %}">
+                            <input class="input" name="ref_2_n" type="text" placeholder="Full name" value="{{ref_2_name}}">
+                            <input class="input" name="ref_2_y" type="text" placeholder="Year of completion" value="{{ref_2_y}}">
+                            <input class="input" name="ref_2_h" type="text" placeholder="House" value="{{ref_2_h}}">
+                            <input class="input" name="ref_2_p" type="text" placeholder="Phone" value="{{ref_2_p}}">
                         </div>
                     </div>
 

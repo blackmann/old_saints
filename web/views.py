@@ -45,6 +45,15 @@ def get_date(date_str):
                          year=split_date[2])
 
 
+def get_reference(pos, context):
+    name = context["ref_%d_name" % pos]
+    year = context["ref_%d_y" % pos]
+    house = context["ref_%d_h" % pos]
+    phone = context["ref_%d_p" % pos]
+
+    return "%s\n%s\n%s\n%s" % (name, year, house, phone, )
+
+
 def clean_registration_form(request, all=False):
     res = {}
     res['first_name'] = request.POST['first_name'].strip()
@@ -68,10 +77,13 @@ def clean_registration_form(request, all=False):
         res['ref_1_name'] = request.POST['ref_1_n'].strip()
         res['ref_1_y'] = request.POST['ref_1_y'].strip()
         res['ref_1_h'] = request.POST['ref_1_h'].strip()
+        res['ref_1_p'] = request.POST['ref_1_p'].strip()
+        res['ref_2_p'] = request.POST['ref_2_p'].strip()
         res['ref_2_name'] = request.POST['ref_2_n'].strip()
         res['ref_2_y'] = request.POST['ref_2_y'].strip()
         res['ref_2_h'] = request.POST['ref_2_h'].strip()
         res['password'] = request.POST['password']
+        res['nickname'] = request.POST['nickname'].strip()
 
     return res
 
@@ -132,14 +144,14 @@ def register(request):
         context.update(clean_data)
 
         if not len(context['password']) > 7:
-            context['error'] = "Password should be more than 7 characters long.ß"
+            context['error'] = "Password should be more than 7 characters long."
             error = True
 
-        if not len(context['ref_2_name']) or not len(context['ref_2_y']) or not len(context['ref_2_h']):
+        if not len(context['ref_2_name']) or not len(context['ref_2_y']) or not len(context['ref_2_h']) or not (len(context['ref_2_p']) in range(10, 13)):
             context['error'] = "Please provide all fields for Reference 2"
             error = True
 
-        if not len(context['ref_1_name']) or not len(context['ref_1_y']) or not len(context['ref_1_h']):
+        if not len(context['ref_1_name']) or not len(context['ref_1_y']) or not len(context['ref_1_h']) or not (len(context['ref_1_p']) in range(10, 13)):
             context['error'] = "Please provide all fields for Reference 1"
             error = True
 
@@ -147,7 +159,7 @@ def register(request):
             context['error'] = "Please fill out both address line 1 and 2"
             error = True
 
-        if not len(context['phone_1']) >= 10:
+        if len(context['phone_1']) not in range (10, 14):
             context['error'] = "Please provide a valid phone number"
             error = True
 
@@ -157,6 +169,10 @@ def register(request):
 
         if not len(context['first_name']) or not len(context['last_name']):
             context['error'] = "Please provide your full name"
+            error = True
+
+        if User.objects.filter(email=context['email']).exists():
+            context['error'] = "There is an account with this email. Please log in instead"
             error = True
 
         if not error:
@@ -170,6 +186,10 @@ def register(request):
 
             chapter = Chapter.objects.get(name=context['chapter'])
             house = House.objects.get(name=context['house'])
+
+            reference_1 = get_reference(1, context)
+            reference_2 = get_reference(2, context)
+
             alumnus = Alumnum.objects.create(user=user,
                                              mobile=context['phone_1'],
                                              telephone=context['phone_2'],
@@ -184,7 +204,10 @@ def register(request):
                                              exam_type=context['exam_type'],
                                              house=house,
                                              profession=context['profession'],
-                                             chapter=chapter)
+                                             chapter=chapter,
+                                             nickname=context['nickname'],
+                                             reference_1=reference_1,
+                                             reference_2=reference_2)
 
             return redirect('web:registration_done')
 
