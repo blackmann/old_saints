@@ -284,3 +284,8 @@ def scholarship_detail(request, scholarship_id):
     }
 
     return render(request, 'web/scholarship_detail.html', context)
+
+
+def about(request):
+
+    return render(request, "web/about.html")

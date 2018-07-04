@@ -15,7 +15,8 @@ urlpatterns = [
     url(r'^scholarships/$', views.scholarships, name="scholarships"), 
     url(r'^scholarship/create/$', views.create_scholarship, name="create_scholarship_post"),
     url(r'^find-mate/$', views.find_mate, name="find_mate",),
-    url(r'^scholarships/(?P<scholarship_id>\d+)/$', views.scholarship_detail, name="scholarship_detail")
+    url(r'^scholarships/(?P<scholarship_id>\d+)/$', views.scholarship_detail, name="scholarship_detail"),
+    url(r'^about/$', views.about, name="about"),
 ]
 
 app_name = 'web'
