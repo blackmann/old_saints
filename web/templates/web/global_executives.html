@@ -1,0 +1,35 @@
+{% extends "web/base.html" %} {% block main_title %} Global Executives {% endblock main_title %} {% block content %}
+<div class="container">
+    <p class="title is-1">General Executives</p>
+    <p>Brief intro on the executives. This is just a placeholder for that.</p>
+    <br>
+    <br>
+
+    <div class="columns is-mobile is-multiple">
+        {% for ge in executives %}
+        <div class="column is-one-third">
+            <div class="box">
+                <article class="media">
+                    <div class="media-left">
+                        <figure class="image is-128x128">
+                            <img src="{{ge.image}}" alt="Image">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>{{ge.name}}</strong>
+                                <br> {{ge.position}}
+                            </p>
+                        </div>
+                        <nav class="level is-mobile">
+                            <a href="">View Profile</a>
+                        </nav>
+                    </div>
+                </article>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

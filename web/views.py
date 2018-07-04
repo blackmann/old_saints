@@ -9,12 +9,26 @@ from web.models import Alumnum, Chapter, House, Job, Scholarship
 
 SALARIES = ['1000-2000', '2000-5000', '5000-10000', ]
 
+EXECUTIVES = [
+    {
+        "name": "Dr. Henry Benyah",
+        "position": "GEC President",
+        "image": "/static/web/images/henrypres.jpg"
+    },
+    {
+        "name": "Robert Nana Mensah",
+        "position": "GEC Executive Member",
+        "image": "/static/web/images/robertgec.jpg"
+    },]
+
 
 def get_chapters():
     return [c.name for c in Chapter.objects.all()]
 
+
 def get_houses():
     return [h.name for h in House.objects.all()]
+
 
 def get_exam_types():
     return ["O'Level", "A'Level", "SSSCE", "WASSCE", ]
@@ -25,16 +39,15 @@ def get_date(date_str):
     Convert date in the form mm/dd/yyyy to date object
     """
     split_date = [int(val) for val in date_str.split('/')]
-    
-    return datetime.date(day=split_date[0],
-                      month=split_date[1],
-                      year=split_date[2])
 
+    return datetime.date(day=split_date[0],
+                         month=split_date[1],
+                         year=split_date[2])
 
 
 def clean_registration_form(request, all=False):
     res = {}
-    res['first_name'] =request.POST['first_name'].strip()
+    res['first_name'] = request.POST['first_name'].strip()
     res['last_name'] = request.POST['last_name'].strip()
     res['email'] = request.POST['email'].strip()
     res['year_of_completion'] = request.POST['year_of_completion']
@@ -65,7 +78,7 @@ def clean_registration_form(request, all=False):
 
 def home(request):
 
-    #TODO the years and house name list
+    # TODO the years and house name list
 
     context = {}
     error = False
@@ -91,7 +104,7 @@ def home(request):
         if not error:
             return redirect('/register/?f=%s&l=%s&e=%s&y=%s&h=%s' %
                             (context['first_name'],
-                             context['last_name'], 
+                             context['last_name'],
                              context['email'],
                              context['year_of_completion'],
                              context['house'], ))
@@ -129,11 +142,11 @@ def register(request):
         if not len(context['ref_1_name']) or not len(context['ref_1_y']) or not len(context['ref_1_h']):
             context['error'] = "Please provide all fields for Reference 1"
             error = True
-        
+
         if not len(context['address_line_1']) or not len(context['address_line_2']):
             context['error'] = "Please fill out both address line 1 and 2"
             error = True
-        
+
         if not len(context['phone_1']) >= 10:
             context['error'] = "Please provide a valid phone number"
             error = True
@@ -146,11 +159,11 @@ def register(request):
             context['error'] = "Please provide your full name"
             error = True
 
-
         if not error:
             # create user
             user = User.objects.create_user(email=context['email'],
-                                            username=context['email'].replace('@', '_'),
+                                            username=context['email'].replace(
+                                                '@', '_'),
                                             first_name=context['first_name'],
                                             last_name=context['last_name'],
                                             password=context['password'])
@@ -166,14 +179,15 @@ def register(request):
                                              instagram=context['instagram'],
                                              address_line_1=context['address_line_1'],
                                              address_line_2=context['address_line_2'],
-                                             year_of_completion=int(context['year_of_completion']),
+                                             year_of_completion=int(
+                                                 context['year_of_completion']),
                                              exam_type=context['exam_type'],
                                              house=house,
                                              profession=context['profession'],
                                              chapter=chapter)
 
             return redirect('web:registration_done')
-    
+
     print(context)
 
     return render(request, "web/registration.html", context)
@@ -191,14 +205,17 @@ def jobs(request):
 
 
 def create_job(request):
-    context  = dict()
+    context = dict()
     title = context['title'] = request.POST.get('title', '')
     position = context['position'] = request.POST.get('position', '')
-    s_description = context['short_description'] = request.POST.get('short_description', '')
-    j_description = context['job_description'] = request.POST.get('job_description', '')
+    s_description = context['short_description'] = request.POST.get(
+        'short_description', '')
+    j_description = context['job_description'] = request.POST.get(
+        'job_description', '')
     company = context['company'] = request.POST.get('company', '')
     location = context['location'] = request.POST.get('location', '')
-    qualifications = context['qualifications'] = request.POST.get('qualifications', '')
+    qualifications = context['qualifications'] = request.POST.get(
+        'qualifications', '')
     salary_range = context['salary_range'] = request.POST.get('salary', '')
     deadline = context['deadline'] = request.POST.get('deadline', '')
     hta = context['hta'] = request.POST.get('hta', '')
@@ -236,7 +253,7 @@ def login_view(request):
 
             else:
                 context['error'] = "The email/password combination is incorrect."
-        
+
         except User.DoesNotExist:
             context['error'] = "The email/password combination is incorrect."
 
@@ -289,3 +306,10 @@ def scholarship_detail(request, scholarship_id):
 def about(request):
 
     return render(request, "web/about.html")
+
+
+def general_executives(request):
+    context = {
+        'executives': EXECUTIVES
+    }
+    return render(request, "web/global_executives.html", context)
