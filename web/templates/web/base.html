@@ -17,14 +17,18 @@
         <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="/">
-                    <img src="{% static 'web/images/oldsaints-01.png' %}" alt="Old Saints" width="20" height="20"> &nbsp;Old Saints
+                    <img src="{% static 'web/images/oldsaints-01.png' %}" alt="Old Saints" width="20" height="20"> &nbsp;{% if home %}
+                    Old Saints
+                    {% else %}
+                    Home
+                    {% endif %}
                 </a>
             </div>
 
             <div class="navbar-menu">
                 <div class="navbar-end">
                     <a class="navbar-item" href="{% url 'web:find_mate' %}">
-                        Find Colleagues
+                        Find Mates
                     </a>
                     <a class="navbar-item" href="{% url 'web:scholarships' %}">
                         Scholarships
@@ -34,10 +38,29 @@
                     </a>
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">
-                            Updates
+                            Info
                         </a>
                         <div class="navbar-dropdown is-boxed">
-                            <a class="navbar-item" href="">
+                            <a class="navbar-item" href="{% url 'web:about' %}">
+                                About
+                            </a>
+                            <a class="navbar-item" href="{% url 'web:global_executives' %}">
+                                Global Executives
+                            </a>
+                            <a class="navbar-item" href="{% url 'web:gallery' %}">
+                                Gallery
+                            </a>
+                            <a href="" class="navbar-item">
+                                Projects
+                            </a>
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            What's Happening
+                        </a>
+                        <div class="navbar-dropdown is-boxed">
+                            <a class="navbar-item" href="{% url 'web:gallery' %}">
                                 Gallery
                             </a>
                             <a class="navbar-item" href="">
@@ -97,6 +120,7 @@
         <button class="delete"></button>
         Site is still under construction. All features are not fully developed.
     </div>
+    <!-- <br> -->
 
     <div class="content-block">
         {% block content %} {% endblock content %}
@@ -112,7 +136,7 @@
                         <a href="{% url 'web:about' %}" class="has-text-grey">About</a>
                     </li>
                     <li>
-                        <a href="" class="has-text-grey">Gallery</a>
+                        <a href="{% url 'web:gallery' %}" class="has-text-grey">Gallery</a>
                     </li>
                     <li>
                         <a href="{% url 'web:global_executives' %}" class="has-text-grey">Global Executives</a>

@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^scholarships/(?P<scholarship_id>\d+)/$', views.scholarship_detail, name="scholarship_detail"),
     url(r'^about/$', views.about, name="about"),
     url('^global-executives/$', views.general_executives, name="global_executives"),
+    url('^gallery/$', views.gallery, name="gallery"),
 ]
 
 app_name = 'web'

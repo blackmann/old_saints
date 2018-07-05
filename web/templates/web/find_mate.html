@@ -2,7 +2,7 @@
 <!-- the search form -->
 
 <div class="container">
-    <p class="title is-3">Find a colleague</p>
+    <p class="title is-3">Find a Mate</p>
     <form action="{% url 'web:find_mate' %}" method="GET">
         <div class="columns">
             <div class="column is-one-third">
@@ -58,7 +58,7 @@
         <br><br>
         <p class="title is-5">Search results</p>
 
-        <div class="columns is-multiple is-mobile">
+        <div class="columns is-multiline is-mobile">
             {% for alum in results %}
             <div class="column is-one-third">
                 <div class="box">
@@ -73,8 +73,7 @@
                                 <p>
                                     <strong>{{alum}}</strong>
                                     <small>{{alum.user.email}}</small>
-                                    <br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa
-                                    fringilla egestas. Nullam condimentum luctus turpis.
+                                    <br>{{alum.profession}} <br> {{alum.address_line_1}} <br>{{alum.address_line_2}}
                                 </p>
                             </div>
                             <nav class="level is-mobile">

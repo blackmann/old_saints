@@ -1,0 +1,34 @@
+{% extends "web/base.html" %} {% block main_title %} Gallery {% endblock main_title %} {% block content %}
+<div class="container">
+    <p class="title is-1">School Gallery</p>
+
+    <div class="columns is-mobile is-multiline">
+        <div class="column is-one-third">
+            <div class="box">
+                <img src="/static/web/images/administration.jpg" alt="">
+                <p class="title is-6">Administration block</p>
+            </div>
+        </div>
+        <div class="column is-one-third">
+            <div class="box">
+                <img src="/static/web/images/oldsaints-gate.jpg" alt="">
+                <p class="title is-6">Entrance</p>
+            </div>
+
+        </div>
+        <div class="column is-one-third">
+            <div class="box">
+                <img src="/static/web/images/chapel.jpg" alt="">
+                <p class="title is-6">Chapel</p>
+            </div>
+        </div>
+
+        <div class="column is-one-third">
+            <div class="box">
+                <img src="/static/web/images/chemlab.jpg" alt="">
+                <p class="title is-6">Chemistry lab</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

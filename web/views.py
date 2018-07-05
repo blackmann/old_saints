@@ -19,6 +19,16 @@ EXECUTIVES = [
         "name": "Robert Nana Mensah",
         "position": "GEC Executive Member",
         "image": "/static/web/images/robertgec.jpg"
+    },
+    {
+        "name": "Kwame Akaba",
+        "position": "GEC Treasurer President",
+        "image": "/static/web/images/akabagec.jpg"
+    },
+    {
+        "name": "Adjamah Codjoe",
+        "position": "GEC Secretary",
+        "image": "/static/web/images/adjamahgec.jpg"
     },]
 
 
@@ -89,37 +99,8 @@ def clean_registration_form(request, all=False):
 
 
 def home(request):
+    context = {"home": True}
 
-    # TODO the years and house name list
-
-    context = {}
-    error = False
-
-    context['first_name'] = ""
-    context['last_name'] = ""
-    context['email'] = ""
-    context['houses'] = get_houses()
-    context['house'] = ''
-
-    if request.method == "POST":
-        # check for the important stuffs
-        context.update(clean_registration_form(request, False))
-
-        if not len(context['first_name']) or not len(context['last_name']):
-            context['error'] = "Please provide your full name"
-            error = True
-
-        if not len(context['email']):
-            context['error'] = "Please provide an email"
-            error = True
-
-        if not error:
-            return redirect('/register/?f=%s&l=%s&e=%s&y=%s&h=%s' %
-                            (context['first_name'],
-                             context['last_name'],
-                             context['email'],
-                             context['year_of_completion'],
-                             context['house'], ))
     return render(request, "web/index.html", context)
 
 
@@ -336,3 +317,8 @@ def general_executives(request):
         'executives': EXECUTIVES
     }
     return render(request, "web/global_executives.html", context)
+
+
+def gallery(request):
+
+    return render(request, "web/gallery.html")
