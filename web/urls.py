@@ -23,6 +23,8 @@ urlpatterns = [
     url(r'^contributions/$', views.contributions, name="contributions"),
     url(r'^dues/$', views.dues, name="dues"),
     url(r'^events/$', views.events, name="events"),
+    url(r'^project/(?P<project_id>\d+)/$', views.project_detail, name="project_detail"),
+    url(r'^profile/(?P<alumn_id>\d+)/$', views.profile, name="profile"),
 ]
 
 app_name = 'web'

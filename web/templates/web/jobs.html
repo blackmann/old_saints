@@ -5,6 +5,40 @@
             Job Opportunities
         </p>
         <a href="{% url 'web:create_job_post' %}" class="button is-primary">Post a Job Opportunity</a>
+        <form action="" method="POST">
+            <div class="level" style="margin-top: 10px;">
+                <div class="level-left">
+                    <div class="level-item">
+                        <strong>Filter</strong>
+                    </div>
+                    <div class="level-item">
+                        <div class="control">
+                            <div class="select">
+                                <select name="profession" id="">
+                                    <option value="all">All Professions</option>
+                                    <option value="accounting">Accounting</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="level-item">
+                        <div class="control">
+                            <div class="select">
+                                <select name="profession" id="">
+                                    <option value="all">All Qualifications</option>
+                                    <option value="accounting">BSc Information Technology</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="level-item">
+                        <button class="button is-info">Apply Filter</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
     </div>
 
     <div class="columns is-multiline is-mobile">

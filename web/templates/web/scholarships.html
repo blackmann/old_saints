@@ -1,15 +1,48 @@
-{% extends "web/base.html" %}
-{% block main_title %}
-Scholarships
-{% endblock main_title %}
-
-{% block content %}
+{% extends "web/base.html" %} {% block main_title %} Scholarships {% endblock main_title %} {% block content %}
 <div class="container centered-div">
     <div style="margin-top: 10px;">
         <p class="is-1 title" style="margin-bottom: 1em;">
-            Scholarship <br>Opportunities
+            Scholarship
+            <br>Opportunities
         </p>
         <a href="{% url 'web:create_scholarship_post' %}" class="button is-primary">Create a Scholarship Opportunity</a>
+
+        <form action="" method="POST">
+            <div class="level" style="margin-top: 10px;">
+                <div class="level-left">
+                    <div class="level-item">
+                        <strong>Filter</strong>
+                    </div>
+                    <div class="level-item">
+                        <div class="control">
+                            <div class="select">
+                                <select name="profession" id="">
+                                    <option value="all">All Programmes</option>
+                                    <option value="accounting">Accounting</option>
+                                    <option value="it">Information Technology</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="level-item">
+                        <div class="control">
+                            <div class="select">
+                                <select name="profession" id="">
+                                    <option value="all">All Degrees</option>
+                                    <option value="accounting">Bachelors</option>
+                                    <option value="bachelors">Masters</option>
+                                    <option value="phd">PhD</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="level-item">
+                        <button class="button is-info">Apply Filter</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 
     {% for scholarship in scholarships %}

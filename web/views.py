@@ -353,3 +353,21 @@ def contributions(request):
 def events(request):
 
     return render(request, 'web/events.html')
+
+
+def project_detail(request, project_id):
+    project = Project.objects.get(pk=project_id)
+
+    context = {
+        "project": project,
+        "contributors": Alumnum.objects.all()
+    }
+
+    return render(request, "web/project_detail.html", context)
+
+
+def profile(request, alumn_id):
+    context = {
+        "profile": Alumnum.objects.get(pk=alumn_id)
+    }
+    return render(request, "web/profile.html", context)

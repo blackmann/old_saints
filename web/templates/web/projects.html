@@ -5,7 +5,7 @@ Projects
 
 {% block content %}
 <div class="container">
-    <p class="title is-1">Projects &amp; Contributions</p>
+    <p class="title is-1">Projects</p>
 
     <div class="columns is-multiline is-mobile">
         {% for post in projects %}
@@ -17,7 +17,7 @@ Projects
 
                 <progress class="progress is-primary is-small" value="75" max="100">75%</progress>
 
-                <a href="">Project Detail</a>
+                <a href="{% url 'web:project_detail' post.id %}">Project Detail</a>
             </div>
         </div>
         {% endfor %}

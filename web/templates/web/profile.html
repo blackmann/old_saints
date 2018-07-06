@@ -1,0 +1,85 @@
+{% extends "web/base.html" %} {% block main_title %} Profile {% endblock main_title %} {% block content %}
+<div class="container centered-div">
+    <div class="level">
+        <div class="level-left">
+            <div class="level-item">
+                <div class="image-cropper">
+                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="" class="cropped-img is-128x128">
+                </div>
+            </div>
+            <div class="level-item">
+                <div>
+                    <p class="is-size-2">
+                        <strong>{{profile}}</strong>
+                    </p>
+                    <p>{{profile.year_of_completion}} &bull; {{profile.house}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <p class="heading is-size-6">Profile</p>
+    <table class="table is-fullwidth">
+        <tbody>
+            <tr>
+                <td>
+                    <strong>Nickname</strong>
+                </td>
+                <td>{{profile.nickname}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Profession</strong>
+                </td>
+                <td>{{profile.profession}}</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <strong>Exam</strong>
+                </td>
+                <td>{{profile.exam_type}}</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <strong>Address</strong>
+                </td>
+                <td>
+                    <p>{{profile.address_line_1}}</p>
+                    <p>{{profile.address_line_2}}</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <strong>Phone</strong>
+                </td>
+                <td>
+                    <p>{{profile.mobile}}</p>
+                    <p>{{profile.telephone}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Email</strong>
+                </td>
+                <td>
+                    <a href="mailto:{{profile.user.email}}">{{profile.user.email}}</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <strong>Social</strong>
+                </td>
+                <td>
+                    <p>{{profile.facebook}}</p>
+                    <p>{{profile.instagram}}</p>
+                    <p>{{profile.twitter}}</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

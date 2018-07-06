@@ -61,7 +61,7 @@
                                 Gallery
                             </a>
                             <a class="navbar-item" href="{% url 'web:projects' %}">
-                                Projects &amp; Contributions
+                                Projects
                             </a>
                             <a class="navbar-item" href="{% url 'web:events' %}">
                                 Events
@@ -74,7 +74,7 @@
                         </a>
                         <div class="navbar-dropdown is-boxed">
                             <a class="navbar-item" href="{% url 'web:projects' %}">
-                                Projects &amp; Contributions
+                                Projects
                             </a>
                             <a class="navbar-item" href="{% url 'web:dues' %}">
                                 Dues
@@ -175,7 +175,7 @@
             </div>
 
             <div class="column">
-                    <a href="/admin/web/" class="has-text-grey">Admin Panel</a>
+                    {% comment %} <a href="/admin/web/" class="has-text-grey">Admin Panel</a> {% endcomment %}
             </div>
         </div>
 

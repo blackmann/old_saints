@@ -71,7 +71,7 @@
                         <div class="media-content">
                             <div class="content">
                                 <p>
-                                    <strong>{{alum}}</strong>
+                                    <a href="{% url 'web:profile' alum.id %}" class="has-text-black"><strong>{{alum}}</strong></a>
                                     <small>{{alum.user.email}}</small>
                                     <br>{{alum.profession}} <br> {{alum.address_line_1}} <br>{{alum.address_line_2}}
                                 </p>

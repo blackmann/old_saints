@@ -1,0 +1,66 @@
+{% extends "web/base.html" %} {% block main_title %} Project Detail {% endblock main_title %} {% block content %}
+<div class="container centered-div">
+    <p class="title is-1">{{project.title}}</p>
+    <p>{{project.description}}</p>
+    <br>
+    <p>[[images for project here]]</p>
+    <br>
+    <nav class="level">
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Target</p>
+                <p class="title">GH¢ {{project.target}}</p>
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Least Contribution</p>
+                <p class="title">GH¢ {{project.least_contribution}}</p>
+            </div>
+        </div>
+    </nav>
+
+    <p class="title is-4" style="margin-top: 3em;">Project Progress</p>
+    <progress class="progress is-primary is-small" value="75" max="100">75%</progress>
+    <nav class="level">
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Contributors</p>
+                <p class="title">203</p>
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Amount Contributed</p>
+                <p class="title">GH¢ 103560</p>
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Average Contribution</p>
+                <p class="title">GH¢ 130</p>
+            </div>
+        </div>
+    </nav>
+
+    <p class="title is-6">Contributors</p>
+    <table class="table is-fullwidth">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Amount Contributed</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contributor in contributors %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{contributor}}</td>
+                <td>GH¢ 100</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
