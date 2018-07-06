@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login
+from django.db.models import Q
 
 import datetime
 
-from web.models import Alumnum, Chapter, House, Job, Scholarship
+from web.models import Alumnum, Chapter, House, Job, Scholarship, \
+    Dues, Project
 
 
 SALARIES = ['1000-2000', '2000-5000', '5000-10000', ]
@@ -29,7 +31,7 @@ EXECUTIVES = [
         "name": "Adjamah Codjoe",
         "position": "GEC Secretary",
         "image": "/static/web/images/adjamahgec.jpg"
-    },]
+    }, ]
 
 
 def get_chapters():
@@ -140,7 +142,7 @@ def register(request):
             context['error'] = "Please fill out both address line 1 and 2"
             error = True
 
-        if len(context['phone_1']) not in range (10, 14):
+        if len(context['phone_1']) not in range(10, 14):
             context['error'] = "Please provide a valid phone number"
             error = True
 
@@ -290,9 +292,11 @@ def find_mate(request):
     }
 
     if request.GET.get('s', None) == '1':
-        context['results'] = Alumnum.objects.all()[:10]
-
-    print(context)
+        name = request.GET.get('q', 0)
+        if name:
+            context['results'] = Alumnum.objects.filter(Q(user__first_name__contains=name)|
+                                                        Q(user__last_name__contains=name))
+            context['q'] = name
 
     return render(request, "web/find_mate.html", context)
 
@@ -322,3 +326,30 @@ def general_executives(request):
 def gallery(request):
 
     return render(request, "web/gallery.html")
+
+
+def projects(request):
+    context = {
+        "projects": Project.objects.all()
+    }
+
+    return render(request, "web/projects.html", context)
+
+
+def dues(request):
+    context = {
+        "dues": Dues.objects.all(),
+        "total": 15.00
+    }
+
+    return render(request, "web/dues.html", context)
+
+
+def contributions(request):
+
+    return render(request, "web/contributions.html")
+
+
+def events(request):
+
+    return render(request, 'web/events.html')

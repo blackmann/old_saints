@@ -4,25 +4,37 @@ Job
 {% endblock main_title %}
 
 {% block content %}
-    <div class="container centered-div" style="margin-top: 3em;">
-        <p class="is-3 title">{{job.post_title}}</p>
-        <p>{{job.company}} &bull; {{job.location}}</p>
+    <div class="container" style="margin-top: 3em;">
+        <div class="columns">
+            <div class="column">
+                    <p class="is-3 title">{{job.post_title}}</p>
+                    <p>{{job.company}} &bull; {{job.location}}</p>
+            
+                    <p class="is-5 title" style="margin-top: 2em;">Details</p>
+                    <p>{{job.job_description}}</p>
+            
+                    <p class="is-5 title" style="margin-top: 2em;">Required Qualifications</p>
+                    <p>{{job.qualifications}}</p>
+            
+                    <p class="is-5 title" style="margin-top: 2em;">Salary Range</p>
+                    <p>{{job.salary_range}}</p>
+            
+                    <p class="is-5 title" style="margin-top: 2em;">How to apply</p>
+                    <p>{{job.how_to_apply}}</p>
+            
+                    <p class="is-5 title" style="margin-top: 2em;">Application Deadline</p>
+                    <p>{{job.deadline}}</p>
+            
+                    <p style="margin-top: 3em;"></p>
+            </div>
 
-        <p class="is-5 title" style="margin-top: 2em;">Details</p>
-        <p>{{job.job_description}}</p>
-
-        <p class="is-5 title" style="margin-top: 2em;">Required Qualifications</p>
-        <p>{{job.qualifications}}</p>
-
-        <p class="is-5 title" style="margin-top: 2em;">Salary Range</p>
-        <p>{{job.salary_range}}</p>
-
-        <p class="is-5 title" style="margin-top: 2em;">How to apply</p>
-        <p>{{job.how_to_apply}}</p>
-
-        <p class="is-5 title" style="margin-top: 2em;">Application Deadline</p>
-        <p>{{job.deadline}}</p>
-
-        <p style="margin-top: 3em;"></p>
+            <div class="column is-one-third">
+                <div class="box">
+                    <p class="title is-4">Similar Jobs</p>
+                    <p>This area will have a list of related jobs</p>
+                </div>
+            </div>
+        </div>
+        
     </div>
 {% endblock content %}

@@ -19,6 +19,10 @@ urlpatterns = [
     url(r'^about/$', views.about, name="about"),
     url('^global-executives/$', views.general_executives, name="global_executives"),
     url('^gallery/$', views.gallery, name="gallery"),
+    url(r'^projects/$', views.projects, name="projects"),
+    url(r'^contributions/$', views.contributions, name="contributions"),
+    url(r'^dues/$', views.dues, name="dues"),
+    url(r'^events/$', views.events, name="events"),
 ]
 
 app_name = 'web'

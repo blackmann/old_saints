@@ -1,0 +1,26 @@
+{% extends "web/base.html" %} 
+{% block main_title %}
+Projects
+{% endblock main_title %}
+
+{% block content %}
+<div class="container">
+    <p class="title is-1">Projects &amp; Contributions</p>
+
+    <div class="columns is-multiline is-mobile">
+        {% for post in projects %}
+        <div class="column is-one-third">
+            <div class="box">
+                <p class="title is-4">{{post.title}}</p>
+                <p><i class="fas fa-bullseye has-text-link"></i> GH¢ {{post.target}} <br>Least Contribution: GH¢{{post.least_contribution}}</p>
+                <br>
+
+                <progress class="progress is-primary is-small" value="75" max="100">75%</progress>
+
+                <a href="">Project Detail</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

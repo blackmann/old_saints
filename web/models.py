@@ -63,6 +63,7 @@ class Dues(models.Model):
 
     class Meta:
         verbose_name_plural = "Dues"
+        ordering = ('-date_paid', )
 
 
 class Job(models.Model):
@@ -96,4 +97,31 @@ class Scholarship(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class ProjectType(models.Model):
+    name = models.CharField(max_length=90)
+
+    def __str__(self):
+        return self.name
+
+
+class Project(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    target = models.DecimalField(decimal_places=2, max_digits=10)
+    payment_deadline = models.DateField()
+    least_contribution = models.DecimalField(decimal_places=2, max_digits=6)
+    active = models.BooleanField(default=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    project_type = models.ForeignKey(ProjectType, related_name="project", on_delete=models.CASCADE)
+
+
+    class Meta:
+        ordering = ('-date_created', )
+
+    
+    def __str__(self):
+        return self.title
+
 
