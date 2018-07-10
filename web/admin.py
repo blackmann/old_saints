@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from web.models import Chapter, Alumnum, House, Dues, Job, Scholarship, \
-                        Project, ProjectType
+                        Project, ProjectType, Event
 
 app_name = "web"
 
@@ -23,6 +23,6 @@ class JobModelAdmin(admin.ModelAdmin):
 class DuesModelAdmin(admin.ModelAdmin):
     list_display = ('alumnum', 'amount', 'for_how_many_months', 'year', 'date_paid', )
 
-admin.site.register((Chapter, House, Scholarship, Project, ProjectType))
+admin.site.register((Chapter, House, Scholarship, Project, ProjectType, Event, ))
 
 admin.site.site_header = "Old Saints Administration"

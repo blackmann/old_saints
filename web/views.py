@@ -6,7 +6,7 @@ from django.db.models import Q
 import datetime
 
 from web.models import Alumnum, Chapter, House, Job, Scholarship, \
-    Dues, Project
+    Dues, Project, Event
 
 
 SALARIES = ['1000-2000', '2000-5000', '5000-10000', ]
@@ -351,8 +351,11 @@ def contributions(request):
 
 
 def events(request):
+    context = {
+        "events": Event.objects.all()
+    }
 
-    return render(request, 'web/events.html')
+    return render(request, 'web/events.html', context)
 
 
 def project_detail(request, project_id):

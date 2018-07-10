@@ -1,6 +1,27 @@
 {% extends "web/base.html" %} {% block main_title %} Events {% endblock main_title %} {% block content %}
-<div class="centered-div">
+
+<div class="container">
     <p class="title is-1">Events</p>
-    <p>There are no events now.</p>
+
+    <div class="columns is-multiline is-mobile">
+        {% for post in events %}
+        <div class="column is-half">
+            <div class="box">
+                <p class="title is-4">{{post.title}}</p>
+
+                <p>{{post.description|truncatechars:100}}</p>
+                <br>
+                <p><strong>Guests:</strong>{% if post.guests %}
+                {{post.guests}}
+                {% else %}
+                Not Specified
+                {% endif %}</p>
+                <br>
+                <a href="" class="button is-primary">Details</a>
+                &nbsp;&nbsp;&nbsp;<a href="">Add to Google Calendar</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock content %}

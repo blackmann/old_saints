@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+#from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 
@@ -115,7 +116,7 @@ class Project(models.Model):
     active = models.BooleanField(default=True)
     date_created = models.DateTimeField(auto_now_add=True)
     project_type = models.ForeignKey(ProjectType, related_name="project", on_delete=models.CASCADE)
-
+    # project_images = ArrayField(models.ImageField(upload_to="media/images/"))
 
     class Meta:
         ordering = ('-date_created', )
@@ -129,6 +130,12 @@ class Event(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     date = models.DateTimeField()
+    guests = models.CharField(max_length=300, blank=True)
+    rate = models.DecimalField(default=0.0, decimal_places=2, max_digits=9)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
     
 
 
