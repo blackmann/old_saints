@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.db.models import Q
 
 import datetime
@@ -32,6 +32,12 @@ EXECUTIVES = [
         "position": "GEC Secretary",
         "image": "/static/web/images/adjamahgec.jpg"
     }, ]
+
+
+YEARS = [str(y) for y in range(1952, 2019)]
+
+PROFESSIONS = ['Accountant', 'Administrative Assistant', 'Advertising copywriter', 'Advertising executive', 'Architect', 'Automobile mechanic', 'Bank manager', 'Bookkeeper', 'Business strategy consultant', 'Carpenter', 'Chief executive officer', 'Chief financial officer', 'Child-care worker', 'City planner', 'Civil engineer', 'Clerical worker', 'Computer software designer', 'Computer systems analyst', 'Credit manager', 'Development manager', 'Diplomat', 'Director of human resources', 'Director of nonprofit organization', 'Economist', 'Elected public official', 'Electrical engineer', 'Electrician', 'Emergency medical technician', 'Entertainer (singer, comedian, etc.)', 'Entrepreneur', 'Event planner', 'Fiction writer', 'Financial analyst', 'Fine artist', 'Firefighter', 'Foreign trade negotiator', 'Graphic Designer', 'High school teacher', 'Homemaker', 'Investigative reporter', 'Investment banker', 'Investment manager', 'Leader of a product- development team', 'Librarian', 'Litigator (courtroom lawyer)', 'Logistical planner', 'Manager at a manufacturing plant', 'Manager of a restaurant', 'Manager of a retail store', 'Manager of a stock or bond mutual fund',
+               'Manager of information systems', 'Manufacturing process engineer', 'Marketing brand manager', 'Marketing researcher', 'Mayor of a city or town', 'Medical researcher', 'Military serviceperson', 'Military strategist', 'Motivational speaker', 'Music composer', 'Newscaster', 'Newspaper editor', 'Nurse', 'Office manager', 'Optometrist', 'Personal financial advisor', 'Police officer', 'President of a community charity', 'Professional actor', 'Professional athlete', 'Professor of political science', 'Proofreader', 'Psychotherapist', 'Public relations professional', 'Real estate developer', 'Real estate salesperson', 'Religious counselor', 'Research and', 'Research sociologist', 'Salesperson for high-tech products', 'Salesperson in a retail store', 'School superintendent', 'Secretary', 'Senior hospital manager', 'Senior manager of a', 'Senior military leader', 'Ship captain', 'Social services professional', 'Speech therapist', 'Sports coach', 'Statistician', 'Stockbroker', 'Surgeon', 'TV or film director', 'TV talk show host', 'Theologian', 'Theoretical physicist', 'University professor', 'Vacation resort manager', 'Venture capitalist', 'Veterinarian', 'manufacturing business']
 
 
 def get_chapters():
@@ -116,7 +122,9 @@ def register(request):
         "exam_type": get_exam_types()[0],
         "chapters": get_chapters(),
         "houses": get_houses(),
-        "exam_types": get_exam_types()
+        "exam_types": get_exam_types(),
+        "years": YEARS,
+        "professions": PROFESSIONS
     }
 
     error = False
@@ -294,7 +302,7 @@ def find_mate(request):
     if request.GET.get('s', None) == '1':
         name = request.GET.get('q', 0)
         if name:
-            context['results'] = Alumnum.objects.filter(Q(user__first_name__contains=name)|
+            context['results'] = Alumnum.objects.filter(Q(user__first_name__contains=name) |
                                                         Q(user__last_name__contains=name))
             context['q'] = name
 
@@ -374,3 +382,8 @@ def profile(request, alumn_id):
         "profile": Alumnum.objects.get(pk=alumn_id)
     }
     return render(request, "web/profile.html", context)
+
+
+def log_out(request):
+    logout(request)
+    return redirect('web:home')

@@ -9,6 +9,7 @@
     <title>{% block main_title %} {% endblock %} | Old Saints</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
     <link rel="stylesheet" href="{% static 'web/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/intlTelInput.min.css' %}">
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 </head>
 
@@ -94,6 +95,7 @@
                             <a class="navbar-item" href="">
                                 Profile
                             </a>
+                            <a href="{% url 'web:logout' %}" class="navbar-item">Log out</a>
                         </div>
                     </div>
                     {% else %}
@@ -182,6 +184,10 @@
         <br>
         <br> &copy; Copyright 2018. Old Saints
     </footer>
+
+    {% block scripts %}
+    
+    {% endblock scripts %}
 </body>
 
 </html>
