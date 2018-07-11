@@ -5,7 +5,7 @@
             Job Opportunities
         </p>
         <a href="{% url 'web:create_job_post' %}" class="button is-primary">Post a Job Opportunity</a>
-        <form action="" method="POST">
+        <form action="{% url 'web:jobs' %}" method="GET">
             <div class="level" style="margin-top: 10px;">
                 <div class="level-left">
                     <div class="level-item">
@@ -16,7 +16,9 @@
                             <div class="select">
                                 <select name="profession" id="">
                                     <option value="all">All Professions</option>
-                                    <option value="accounting">Accounting</option>
+                                    {% for prof in professions %}
+                                    <option value="{{prof}}" {% if prof == profession %}selected{% endif %}>{{prof}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>
@@ -24,14 +26,14 @@
                     <div class="level-item">
                         <div class="control">
                             <div class="select">
-                                <select name="profession" id="">
+                                <select name="qualification" id="">
                                     <option value="all">All Qualifications</option>
                                     <option value="accounting">BSc Information Technology</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-
+                    <input type="hidden" name="f" value="1">
                     <div class="level-item">
                         <button class="button is-info">Apply Filter</button>
                     </div>

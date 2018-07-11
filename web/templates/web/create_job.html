@@ -21,6 +21,20 @@
         </div>
 
         <div class="field">
+            <label class="label">Type of Profession</label>
+            <div class="control">
+                <div class="select">
+                    <select name="profession" id="">
+                        {% for prof in professions %}
+                        <option {% if prof is profession %}selected{% endif %} value="{{prof}}">{{prof}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="field">
             <label class="label">Short Description</label>
             <div class="control">
                 <textarea class="textarea" name="short_description" placeholder="Short header for this job post"></textarea>

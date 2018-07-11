@@ -79,6 +79,7 @@ class Job(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     qualifications = models.CharField(max_length=100)
     deadline = models.DateField()
+    profession_type = models.CharField(max_length=100, default="General")
     posted_by = models.ForeignKey(Alumnum, related_name="jobs", on_delete=models.CASCADE)
 
     class Meta:

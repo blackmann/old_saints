@@ -212,14 +212,27 @@ def done(request):
 
 
 def jobs(request):
+    q_jobs = Job.objects.all()
     context = {
-        "jobs": Job.objects.all()
+        "professions": PROFESSIONS
     }
+
+    if request.GET.get('f', 0):
+        profession = request.GET.get('profession', 'all')
+        if not profession == 'all':
+            q_jobs = q_jobs.filter(profession_type=profession)
+
+        context['profession'] = profession
+    
+    context['jobs'] = q_jobs.all()
+    
     return render(request, "web/jobs.html", context)
 
 
 def create_job(request):
-    context = dict()
+    context = {
+        "professions": PROFESSIONS
+    }
     title = context['title'] = request.POST.get('title', '')
     position = context['position'] = request.POST.get('position', '')
     s_description = context['short_description'] = request.POST.get(
@@ -233,6 +246,9 @@ def create_job(request):
     salary_range = context['salary_range'] = request.POST.get('salary', '')
     deadline = context['deadline'] = request.POST.get('deadline', '')
     hta = context['hta'] = request.POST.get('hta', '')
+    profession = context['profession'] = request.POST.get('profession', '')
+
+    # validation
 
     if request.method == 'POST':
         job_post = Job.objects.create(post_title=title,
@@ -302,8 +318,10 @@ def find_mate(request):
     if request.GET.get('s', None) == '1':
         name = request.GET.get('q', 0)
         if name:
-            context['results'] = Alumnum.objects.filter(Q(user__first_name__contains=name) |
+            results = Alumnum.objects.filter(Q(user__first_name__contains=name) |
                                                         Q(user__last_name__contains=name))
+
+            context['results'] = results.all()
             context['q'] = name
 
     return render(request, "web/find_mate.html", context)
