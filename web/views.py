@@ -201,8 +201,8 @@ def register(request):
                                              reference_2=reference_2)
 
             return redirect('web:registration_done')
-
-    print(context)
+        
+        print(request.POST)
 
     return render(request, "web/registration.html", context)
 

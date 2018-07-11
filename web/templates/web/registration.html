@@ -118,13 +118,13 @@
                         <div class="column">
                             <div class="field">
                                 <label for="name" class="label">Phone Number 1</label>
-                                <input id="phone1" class="input" name="phone_1" type="tel" value="{% if phone_1 %}{{phone_1}}{% endif %}">
+                                <input id="phone_1" class="input" type="tel" value="{% if phone_1 %}{{phone_1}}{% endif %}">
                             </div>
                         </div>
                         <div class="column">
                             <div class="field">
                                 <label for="name" class="label">Phone Number 2 (Optional)</label>
-                                <input id="phone2" class="input" name="phone_2" type="tel" value="{% if phone_2 %}{{phone_2}}{% endif %}">
+                                <input id="phone_2" class="input" type="tel" value="{% if phone_2 %}{{phone_2}}{% endif %}">
                             </div>
                         </div>
                     </div>
@@ -137,22 +137,22 @@
 
                     <div class="field">
                         <label class="label" for="whatsapp">Whatsapp</label>
-                        <input class="input" id="whatsapp" type="text" placeholder="Optional" name="whatsapp">
+                        <input class="input" id="whatsapp" type="text" placeholder="Optional" value="{{whatsapp}}">
                     </div>
 
                     <div class="field">
                         <label class="label" for="facebook">Facebook username</label>
-                        <input class="input" id="facebook" type="text" placeholder="(Optional) Eg. kofi.duodu" name="facebook">
+                        <input class="input" id="facebook" type="text" placeholder="(Optional) Eg. kofi.duodu" name="facebook" value="{{facebook}}">
                     </div>
 
                     <div class="field">
                         <label class="label" for="twitter">Twitter</label>
-                        <input class="input" id="twitter" type="text" placeholder="Optional" name="twitter">
+                        <input class="input" id="twitter" type="text" placeholder="Optional" name="twitter" value="{{twitter}}">
                     </div>
 
                     <div class="field">
                         <label class="label" for="instagram">Instagram</label>
-                        <input class="input" id="instagram" type="text" placeholder="Optional" name="instagram">
+                        <input class="input" id="instagram" type="text" placeholder="Optional" name="instagram" value="{{instagram}}">
                     </div>
 
                     <div class="columns">
@@ -161,14 +161,14 @@
                             <input class="input" name="ref_1_n" type="text" placeholder="Full name" value="{{ref_1_name}}">
                             <input class="input" name="ref_1_y" type="text" placeholder="Year of completion" value="{{ref_1_y}}">
                             <input class="input" name="ref_1_h" type="text" placeholder="House" value="{{ref_1_h}}">
-                            <input class="input" name="ref_1_p" type="tel" placeholder="Phone" value="{{ref_1_p}}" id="ref_1p">
+                            <input class="input" type="tel" placeholder="Phone" value="{{ref_1_p}}" id="ref_1_p">
                         </div>
                         <div class="column">
                             <label for="" class="label">Reference 2</label>
                             <input class="input" name="ref_2_n" type="text" placeholder="Full name" value="{{ref_2_name}}">
                             <input class="input" name="ref_2_y" type="text" placeholder="Year of completion" value="{{ref_2_y}}">
                             <input class="input" name="ref_2_h" type="text" placeholder="House" value="{{ref_2_h}}">
-                            <input class="input" name="ref_2_p" type="text" placeholder="Phone" value="{{ref_2_p}}" id="ref_2p">
+                            <input class="input" type="text" placeholder="Phone" value="{{ref_2_p}}" id="ref_2_p">
                         </div>
                     </div>
 
@@ -201,12 +201,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/static/web/js/intlTelInput.min.js"></script>
 <script>
-  $("#phone1").intlTelInput({"preferredCountries": ["gh", "us"]});
-  $("#phone2").intlTelInput({"preferredCountries": ["gh", "us"]});
-
-  $("#whatsapp").intlTelInput({"preferredCountries": ["gh", "us"]});
-
-  $("#ref_1p").intlTelInput({"preferredCountries": ["gh", "us"]});
-  $("#ref_2p").intlTelInput({"preferredCountries": ["gh", "us"]});
+    var phoneIds = ["phone_1", "phone_2", "whatsapp", "ref_1_p", "ref_2_p"]
+    phoneIds.forEach((item) => {
+        $("#"+item).intlTelInput({
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+                var countryCode = (resp && resp.country) ? resp.country : "";
+                callback(countryCode);
+                });
+            }, 
+            hiddenInput: item,
+            utilsScript: "/static/web/js/utils.js"
+        })
+    })
 </script>
 {% endblock scripts %}
