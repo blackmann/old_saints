@@ -230,9 +230,12 @@ def jobs(request):
 
 
 def create_job(request):
+    error = False
+
     context = {
         "professions": PROFESSIONS
     }
+
     title = context['title'] = request.POST.get('title', '')
     position = context['position'] = request.POST.get('position', '')
     s_description = context['short_description'] = request.POST.get(
@@ -248,22 +251,29 @@ def create_job(request):
     hta = context['hta'] = request.POST.get('hta', '')
     profession = context['profession'] = request.POST.get('profession', '')
 
-    # validation
-
     if request.method == 'POST':
-        job_post = Job.objects.create(post_title=title,
-                                      position=position,
-                                      short_description=s_description,
-                                      job_description=j_description,
-                                      salary_range=SALARIES[int(salary_range)],
-                                      location=location,
-                                      company=company,
-                                      how_to_apply=hta,
-                                      qualifications=qualifications,
-                                      deadline=get_date(deadline),
-                                      posted_by=Alumnum.objects.get(pk=1))
-        if job_post:
-            return redirect('web:jobs')
+        # validation
+        if not (title and position and s_description and j_description and company and
+                location and qualifications and salary_range and deadline and hta and profession):
+                context['error'] = "Please fill in all fields"
+                error = True
+        
+        if not error:
+            job_post = Job.objects.create(post_title=title,
+                                        position=position,
+                                        short_description=s_description,
+                                        job_description=j_description,
+                                        salary_range=SALARIES[int(salary_range)],
+                                        location=location,
+                                        company=company,
+                                        profession_type=profession,
+                                        how_to_apply=hta,
+                                        qualifications=qualifications,
+                                        deadline=get_date(deadline),
+                                        posted_by=Alumnum.objects.first())
+            if job_post:
+                return redirect('web:jobs')
+        print(context)
     return render(request, "web/create_job.html", context)
 
 

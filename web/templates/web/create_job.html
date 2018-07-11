@@ -6,6 +6,9 @@
     <br>
 
     <form action="{% url 'web:create_job_post' %}" method="POST">
+            {% if error %}
+            <p class="is-danger help">{{error}}</p>
+            {% endif %}
         <div class="field">
             <label class="label">Post Title</label>
             <div class="control">
