@@ -17,19 +17,18 @@
                             <select name="house">
                                 <option>All Houses</option>
                                 {% for h in houses %}
-                                <option>{{h}}</option>
+                                <option {%if h.name == house %}selected{% endif %}>{{h}}</option>
                                 {% endfor %}
                             </select>
                         </div>
                     </div>
                     <div class="control inline-fields">
                         <div class="select">
-                            <select name="house">
+                            <select name="year">
                                 <option>All Years</option>
-                                <option value="">1980</option>
-                                <option value="">1981</option>
-                                <option value="">1982</option>
-                                <option value="">1983</option>
+                                {% for year in years %}
+                                <option value="{{y}}">{{y}}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
@@ -39,7 +38,7 @@
                             <select name="chapter">
                                 <option value="">All Chapters</option>
                                 {% for ch in chapters %}
-                                <option value="{{ch}}">{{ch}}</option>
+                                <option value="{{ch}}"  {%if ch.name == chapter %}selected{% endif %}>{{ch}}</option>
                                 {% endfor %}
                             </select>
                         </div>

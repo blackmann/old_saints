@@ -322,17 +322,33 @@ def create_scholarship(request):
 def find_mate(request):
     context = {
         'houses': House.objects.all(),
-        'chapters': Chapter.objects.all()
+        'chapters': Chapter.objects.all(),
+        'years': YEARS
     }
 
     if request.GET.get('s', None) == '1':
         name = request.GET.get('q', 0)
-        if name:
+        if len(name) > 1:
             results = Alumnum.objects.filter(Q(user__first_name__contains=name) |
-                                                        Q(user__last_name__contains=name))
+                                                        Q(user__last_name__contains=name)|
+                                                        Q(nickname__contains=name))
+            house = request.GET.get('house', 0)
+            year = request.GET.get('year', 0)
+            chapter = request.GET.get('chapter', 0)
+            if house and not house == "All Houses":
+                results = results.filter(house=House.objects.get(name=house))
+
+            if year and not year == "All Years":
+                results = results.filter(year_of_completion=int(year))
+            
+            if chapter and not chapter == "All Chapters":
+                results = results.filter(chapter=Chapter.objects.get(name=chapter))
 
             context['results'] = results.all()
             context['q'] = name
+            context['year'] = year
+            context['chapter'] = chapter
+            context['house'] = house
 
     return render(request, "web/find_mate.html", context)
 
