@@ -426,10 +426,13 @@ def events(request):
 @login_required
 def project_detail(request, project_id):
     project = Project.objects.get(pk=project_id)
+    image_attrs = ["image%d" % i for i in range(1, 7)]
+    project_images = [getattr(project, img) for img in image_attrs]
 
     context = {
         "project": project,
-        "contributors": Alumnum.objects.all()
+        "contributors": Alumnum.objects.all(),
+        "project_images": project_images
     }
 
     return render(request, "web/project_detail.html", context)

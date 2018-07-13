@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User
-#from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 
@@ -40,7 +39,7 @@ class Alumnum(models.Model):
     reference_2 = models.TextField(blank=True)
     
     verified = models.BooleanField(default=False)
-    # executive = models.BooleanField(default=False)
+    executive = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "Alumni"
@@ -118,7 +117,12 @@ class Project(models.Model):
     active = models.BooleanField(default=True)
     date_created = models.DateTimeField(auto_now_add=True)
     project_type = models.ForeignKey(ProjectType, related_name="project", on_delete=models.CASCADE)
-    # project_images = ArrayField(models.ImageField(upload_to="media/images/"))
+    image1 = models.ImageField(upload_to="images/", blank=True)
+    image2 = models.ImageField(upload_to="images/", blank=True)
+    image3 = models.ImageField(upload_to="images/", blank=True)
+    image4 = models.ImageField(upload_to="images/", blank=True)
+    image5 = models.ImageField(upload_to="images/", blank=True)
+    image6 = models.ImageField(upload_to="images/", blank=True)
 
     class Meta:
         ordering = ('-date_created', )

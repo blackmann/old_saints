@@ -1,10 +1,9 @@
 {% extends "web/base.html" %} {% block main_title %} Project Detail {% endblock main_title %} {% block content %}
 <div class="container centered-div">
     <p class="title is-1">{{project.title}}</p>
-    <p>{{project.description}}</p>
+    <p>{{project.description|linebreaksbr}}</p>
     <br>
-    <p>[[images for project here]]</p>
-    <br>
+
     <nav class="level">
         <div class="level-item has-text-centered">
             <div>
@@ -19,6 +18,17 @@
             </div>
         </div>
     </nav>
+    <br>
+
+    <p class="title is-4">Project Images</p>
+    {% for pi in project_images %}
+    {% if pi %}
+    
+    <img src="{{pi.url}}" alt="{{pi.name}}">
+    {% else %}
+    {% endif %}
+    {% endfor %}
+    <br>
 
     <p class="title is-4" style="margin-top: 3em;">Project Progress</p>
     <progress class="progress is-primary is-small" value="75" max="100">75%</progress>
