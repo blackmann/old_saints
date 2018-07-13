@@ -40,6 +40,7 @@ class Alumnum(models.Model):
     reference_2 = models.TextField(blank=True)
     
     verified = models.BooleanField(default=False)
+    # executive = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "Alumni"

@@ -86,7 +86,7 @@
         <div class="field">
             <label class="label">Deadline</label>
             <div class="control">
-                <input class="input" name="deadline" type="text" placeholder="DD/MM/YYYY" style="width: 200px">
+                <input class="input" id="deadline" name="deadline" placeholder="DD/MM/YYYY" style="width: 200px">
             </div>
         </div>
 
@@ -103,3 +103,11 @@
     </form>
 </div>
 {% endblock content %}
+
+{% block scripts %}
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $("#deadline").datepicker()
+</script>
+{% endblock scripts %}
