@@ -95,7 +95,9 @@ class Scholarship(models.Model):
     school = models.CharField(max_length=70)
     description = models.TextField()
     posted_on = models.DateTimeField(auto_now_add=True)
-    how_to_apply = models.CharField(max_length=70)
+    how_to_apply = models.TextField()
+    degree = models.CharField(max_length=50)
+    location = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title

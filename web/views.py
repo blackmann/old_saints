@@ -12,6 +12,8 @@ from web.models import Alumnum, Chapter, House, Job, Scholarship, \
 
 SALARIES = ['1000-2000', '2000-5000', '5000-10000', ]
 
+DEGREES = ['Bachelors Degree', 'Masters Degree', 'PhD', ]
+
 EXECUTIVES = [
     {
         "name": "Dr. Henry Benyah",
@@ -321,8 +323,31 @@ def scholarships(request):
 
 @login_required
 def create_scholarship(request):
+    context = {
+        'degrees': DEGREES
+    }
 
-    return render(request, 'web/create_scholarship.html')
+    if request.method == 'POST':
+        title = context['title'] = request.POST.get('title', '')
+        certification = context['degree'] = request.POST.get('degree', '')
+        description = context['description'] = request.POST.get('description', '')
+        school = context['school'] = request.POST.get('school', '')
+        location = context['location'] = request.POST.get('location', '')
+        how_to_apply = context['hta'] = request.POST.get('hta', '')
+
+        # TODO validation
+        scholarship = Scholarship.objects.create(title=title,
+                                                 degree=certification,
+                                                 description=description,
+                                                 school=school,
+                                                 location=location,
+                                                 how_to_apply=how_to_apply,
+                                                 posted_by=Alumnum.objects.get(user=request.user))
+        
+        if scholarship:
+            return redirect('web:scholarships')
+
+    return render(request, 'web/create_scholarship.html', context)
 
 
 @login_required

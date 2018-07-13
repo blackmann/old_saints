@@ -1,8 +1,74 @@
-{% extends "web/base.html" %}
-{% block main_title %}
-Create Scholarship
-{% endblock main_title %}
+{% extends "web/base.html" %} {% block main_title %} Create Scholarship {% endblock main_title %} {% block content %}
+<div class="container centered-div">
+    <p class="title is-1">Create New
+        <br> Scholarship</p>
+    <p>Please fill in all the fields below</p>
+    <br>
 
-{% block content %}
+    <form action="{% url 'web:create_scholarship_post' %}" method="POST">
+            {% if error %}
+            <p class="is-danger help">{{error}}</p>
+            {% endif %}
+        <div class="field">
+            <label class="label">Post Title</label>
+            <div class="control">
+                <input class="input" name="title" type="text" placeholder="Short header for this scholarship" value="{{title}}">
+            </div>
+        </div>
 
+        <div class="field">
+            <label class="label">Certification/Degree</label>
+            <div class="control">
+                <div class="select">
+                    <select name="degree" id="">
+                        {% for deg in degrees %}
+                        <option {% if deg is degree %}selected{% endif %} value="{{deg}}">{{deg}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Description</label>
+            <div class="control">
+                <textarea class="textarea" name="description" placeholder="Provide full details for the scholarship."></textarea>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">School</label>
+            <div class="control">
+                <input class="input" name="school" type="text" value="{{school}}">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Location</label>
+            <div class="control">
+                <input class="input" name="location" type="text" style="width: 300px;" value="{{location}}">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">How to Apply</label>
+            <div class="control">
+                <textarea class="textarea" name="hta" type="text" value="{{hta}}"></textarea>
+            </div>
+        </div>
+
+        {% csrf_token %}
+
+        <button class="button is-info" type="submit" style="margin-bottom: 2em;">Submit</button>
+    </form>
+</div>
 {% endblock content %}
+
+{% block scripts %}
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $("#deadline").datepicker()
+</script>
+{% endblock scripts %}

@@ -1,6 +1,6 @@
 {% extends "web/base.html" %}
 {% block main_title %}
-Job
+Scholarship
 {% endblock main_title %}
 
 {% block content %}
@@ -8,10 +8,13 @@ Job
         <div class="columns">
             <div class="column">
                     <p class="is-3 title">{{scholarship.title}}</p>
-                    <p>{{scholarship.school}} &bull;</p>
+                    <p>{{scholarship.school}} &bull; {{scholarship.location}}</p>
+
+                    <p class="is-5 title" style="margin-top: 2em;">Degree/Certification</p>
+                    <p>{{scholarship.degree}}</p>
             
                     <p class="is-5 title" style="margin-top: 2em;">Details</p>
-                    <p>{{scholarship.description}}</p>
+                    <p>{{scholarship.description|linebreaksbr}}</p>
             
                     <p class="is-5 title" style="margin-top: 2em;">How to apply</p>
                     <p>{{scholarship.how_to_apply}}</p>
