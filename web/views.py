@@ -284,7 +284,7 @@ def create_job(request):
 
 def login_view(request):
     context = {
-        'next': request.GET.get('next', None)
+        'next': request.GET.get('next', '')
     }
     if request.method == 'POST':
         email = request.POST['email']
