@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from django.db.models import Q
 
@@ -211,6 +212,7 @@ def done(request):
     return render(request, "web/registration_complete.html")
 
 
+@login_required
 def jobs(request):
     q_jobs = Job.objects.all()
     context = {
@@ -278,9 +280,9 @@ def create_job(request):
 
 
 def login_view(request):
-
-    context = dict()
-
+    context = {
+        'next': request.GET.get('next', None)
+    }
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -289,7 +291,7 @@ def login_view(request):
             user = User.objects.get(email=email)
             if user.check_password(password):
                 login(request, user)
-                return redirect(request.GET.get('next', None) or 'web:home')
+                return redirect(context['next'] or 'web:home')
 
             else:
                 context['error'] = "The email/password combination is incorrect."
@@ -300,6 +302,7 @@ def login_view(request):
     return render(request, 'web/login.html', context)
 
 
+@login_required
 def job_detail(request, job_id):
     context = {
         'job': Job.objects.get(pk=job_id)
@@ -307,6 +310,7 @@ def job_detail(request, job_id):
     return render(request, 'web/job_detail.html', context)
 
 
+@login_required
 def scholarships(request):
     context = {
         'scholarships': Scholarship.objects.all()
@@ -314,11 +318,13 @@ def scholarships(request):
     return render(request, 'web/scholarships.html', context)
 
 
+@login_required
 def create_scholarship(request):
 
     return render(request, 'web/create_scholarship.html')
 
 
+@login_required
 def find_mate(request):
     context = {
         'houses': House.objects.all(),
@@ -353,6 +359,7 @@ def find_mate(request):
     return render(request, "web/find_mate.html", context)
 
 
+@login_required
 def scholarship_detail(request, scholarship_id):
     scholarship = Scholarship.objects.get(pk=scholarship_id)
 
@@ -368,6 +375,7 @@ def about(request):
     return render(request, "web/about.html")
 
 
+@login_required
 def general_executives(request):
     context = {
         'executives': EXECUTIVES
@@ -375,11 +383,13 @@ def general_executives(request):
     return render(request, "web/global_executives.html", context)
 
 
+@login_required
 def gallery(request):
 
     return render(request, "web/gallery.html")
 
 
+@login_required
 def projects(request):
     context = {
         "projects": Project.objects.all()
@@ -388,6 +398,7 @@ def projects(request):
     return render(request, "web/projects.html", context)
 
 
+@login_required
 def dues(request):
     context = {
         "dues": Dues.objects.all(),
@@ -397,11 +408,13 @@ def dues(request):
     return render(request, "web/dues.html", context)
 
 
+@login_required
 def contributions(request):
 
     return render(request, "web/contributions.html")
 
 
+@login_required
 def events(request):
     context = {
         "events": Event.objects.all()
@@ -410,6 +423,7 @@ def events(request):
     return render(request, 'web/events.html', context)
 
 
+@login_required
 def project_detail(request, project_id):
     project = Project.objects.get(pk=project_id)
 
@@ -421,6 +435,7 @@ def project_detail(request, project_id):
     return render(request, "web/project_detail.html", context)
 
 
+@login_required
 def profile(request, alumn_id):
     context = {
         "profile": Alumnum.objects.get(pk=alumn_id)

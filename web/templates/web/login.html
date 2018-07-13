@@ -7,7 +7,7 @@
         <div class="column container">
             <p class="is-1 title">Log in</p>
             <p>Please log in with your email and password</p>
-            <form action="{% url 'web:login' %}" method="POST">
+            <form action="{% url 'web:login'  %}?next={{next}}" method="POST">
                 {% if error %}
                 <p class="is-danger help">{{error}}</p>
                 {% else %}
