@@ -141,11 +141,11 @@ def register(request):
             context['error'] = "Password should be more than 7 characters long."
             error = True
 
-        if not len(context['ref_2_name']) or not len(context['ref_2_y']) or not len(context['ref_2_h']) or not (len(context['ref_2_p']) in range(10, 13)):
+        if not len(context['ref_2_name']) or not len(context['ref_2_y']) or not len(context['ref_2_h']) or not (len(context['ref_2_p']) in range(10, 14)):
             context['error'] = "Please provide all fields for Reference 2"
             error = True
 
-        if not len(context['ref_1_name']) or not len(context['ref_1_y']) or not len(context['ref_1_h']) or not (len(context['ref_1_p']) in range(10, 13)):
+        if not len(context['ref_1_name']) or not len(context['ref_1_y']) or not len(context['ref_1_h']) or not (len(context['ref_1_p']) in range(10, 14)):
             context['error'] = "Please provide all fields for Reference 1"
             error = True
 
