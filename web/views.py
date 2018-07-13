@@ -231,6 +231,7 @@ def jobs(request):
     return render(request, "web/jobs.html", context)
 
 
+@login_required
 def create_job(request):
     error = False
 
@@ -272,7 +273,7 @@ def create_job(request):
                                         how_to_apply=hta,
                                         qualifications=qualifications,
                                         deadline=get_date(deadline),
-                                        posted_by=Alumnum.objects.first())
+                                        posted_by=Alumnum.objects.get(user=request.user))
             if job_post:
                 return redirect('web:jobs')
         print(context)
