@@ -4,39 +4,52 @@
     <p>All dues are paid to the chapter admin. Dues should be paid in time, to be able to view privileged content. </p>
     <br>
 
-    <table class="table is-fullwidth">
-        <thead>
-            <tr>
-                <th>Date Paid</th>
-                <th>Amount</th>
-                <th>For the year</th>
-            </tr>
-        </thead>
+    <div class="columns">
+        <div class="column">
+            <table class="table is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>Date Paid</th>
+                        <th>Amount</th>
+                        <th>For the year</th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    {% for item in dues %}
+                    <tr>
+                        <td>{{item.date_paid}}</td>
+                        <td>{{item.amount}}</td>
+                        <td>{{item.year}}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>
+                            <strong>Total</strong>
+                        </td>
+                        <td class="is-size-4">{{total}}</td>
+                        <td></td>
+                    </tr>
+        
+                    <tr>
+                        <td>
+                            <strong class="has-text-danger">Outstanding</strong>
+                        </td>
+                        <td class="has-text-danger">{% if outstanding > 0 %}
+                            {{outstanding}}
+                        {% else %}
+                        0
+                        {% endif %}</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="column">
 
-        <tbody>
-            {% for item in dues %}
-            <tr>
-                <td>{{item.date_paid}}</td>
-                <td>{{item.amount}}</td>
-                <td>{{item.year}}</td>
-            </tr>
-            {% endfor %}
-            <tr>
-                <td>
-                    <strong class="has-text-primary">Total</strong>
-                </td>
-                <td>{{total}}</td>
-                <td></td>
-            </tr>
+        </div>
+    </div>
 
-            <tr>
-                <td>
-                    <strong class="has-text-danger">Outstanding</strong>
-                </td>
-                <td>25.00</td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+    
 </div>
 {% endblock content %}

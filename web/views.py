@@ -14,6 +14,8 @@ SALARIES = ['1000-2000', '2000-5000', '5000-10000', ]
 
 DEGREES = ['Bachelors Degree', 'Masters Degree', 'PhD', ]
 
+DUES_PER_MONTH = 5.0
+
 EXECUTIVES = [
     {
         "name": "Dr. Henry Benyah",
@@ -426,9 +428,17 @@ def projects(request):
 
 @login_required
 def dues(request):
+    user_dues = Dues.objects.filter(alumnum=request.user.alumnum).all()
+    total = sum([d.amount for d in user_dues])
+
+    current_month = datetime.datetime.now().month
+
+    # calculate the outstanding
+    outstanding = (DUES_PER_MONTH*current_month) - float(total)
     context = {
-        "dues": Dues.objects.all(),
-        "total": 15.00
+        "dues": user_dues,
+        "total": total,
+        "outstanding": outstanding
     }
 
     return render(request, "web/dues.html", context)
