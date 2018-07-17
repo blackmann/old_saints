@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
@@ -477,7 +477,7 @@ def project_detail(request, project_id):
 @login_required
 def profile(request, alumn_id):
     context = {
-        "profile": Alumnum.objects.get(pk=alumn_id)
+        "profile": get_object_or_404(Alumnum, pk=int(alumn_id))
     }
     return render(request, "web/profile.html", context)
 
@@ -485,3 +485,14 @@ def profile(request, alumn_id):
 def log_out(request):
     logout(request)
     return redirect('web:home')
+
+
+@login_required
+def event_detail(request, event_id):
+    event = get_object_or_404(Event, pk=int(event_id))
+    context = {
+        'event': event,
+        'next_events': Event.objects.filter(date__gte=event.date)
+    }
+
+    return render(request, 'web/event_detail.html', context)

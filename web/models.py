@@ -141,6 +141,8 @@ class Event(models.Model):
     guests = models.CharField(max_length=300, blank=True)
     rate = models.DecimalField(default=0.0, decimal_places=2, max_digits=9)
     active = models.BooleanField(default=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    venue = models.CharField(max_length=300)
 
     def __str__(self):
         return self.title

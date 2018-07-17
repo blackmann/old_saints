@@ -1,0 +1,40 @@
+{% extends "web/base.html" %}
+{% block main_title %}
+Event Detail
+{% endblock main_title %}
+
+{% block content %}
+
+<div class="container">
+    <div class="columns">
+            <div class="column is-two-thirds">
+                <p class="title is-3">{{event.title}}</p>
+
+                <p class="has-text-info"><strong>Venue:</strong> {{event.venue}}</p>
+                <p class="has-text-info"><strong>Date and Time</strong>: {{event.date}}</p>
+
+                {% if event.rate %}
+                <p class="has-text-info"><strong>Rate:</strong> GH¢ {{event.rate}}</p>
+                {% else %}
+                {% endif %}
+
+                {% if event.guests %}
+                <p class="has-text-info"><strong>Guests:</strong> {{event.guests}}</p>
+                {% else %}
+                {% endif %}
+                <br>
+                <p>{{event.description|linebreaksbr}}</p>
+                <br>
+
+                <a href="" class="button is-info">Add this event to your Google Calendar</a>
+            </div>
+        
+            <div class="column is-one-third">
+                <div class="box">
+                    <p class="title is-4">Next Events</p>
+                </div>
+            </div>
+    </div>
+</div>
+
+{% endblock content %}

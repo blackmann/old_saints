@@ -11,13 +11,12 @@
 
                 <p>{{post.description|truncatechars:100}}</p>
                 <br>
-                <p><strong>Guests:</strong>{% if post.guests %}
-                {{post.guests}}
-                {% else %}
-                Not Specified
-                {% endif %}</p>
+                {% if post.guests %}
+                <p><strong>Guests:</strong> {{post.guests}}</p>
+                {% endif %}
+                <p><strong>Date and Time:</strong>{{post.date}}</p>
                 <br>
-                <a href="" class="button is-primary">Details</a>
+                <a href="{% url 'web:event_detail' post.id %}" class="button is-primary">Details</a>
                 &nbsp;&nbsp;&nbsp;<a href="">Add to Google Calendar</a>
             </div>
         </div>

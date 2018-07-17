@@ -25,7 +25,8 @@ urlpatterns = [
     url(r'^events/$', views.events, name="events"),
     url(r'^project/(?P<project_id>\d+)/$', views.project_detail, name="project_detail"),
     url(r'^profile/(?P<alumn_id>\d+)/$', views.profile, name="profile"),
-    url(r'^logout/$', views.log_out, name="logout")
+    url(r'^logout/$', views.log_out, name="logout"),
+    url(r'^event/(?P<event_id>\d+)/', views.event_detail, name="event_detail")
 ]
 
 app_name = 'web'

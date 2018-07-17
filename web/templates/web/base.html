@@ -93,7 +93,7 @@
                             <a class="navbar-item" target="_blank" href="/admin/web/">
                                 Admin Site
                             </a>
-                            <a class="navbar-item" href="">
+                            <a class="navbar-item" href="{% url 'web:profile' user.alumnum.id %}">
                                 Profile
                             </a>
                             <a href="{% url 'web:logout' %}" class="navbar-item">Log out</a>
