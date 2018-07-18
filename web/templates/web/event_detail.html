@@ -26,7 +26,7 @@ Event Detail
                 <p>{{event.description|linebreaksbr}}</p>
                 <br>
 
-                <a href="" class="button is-info">Add this event to your Google Calendar</a>
+                <a target="_blank" href="https://www.google.com/calendar/render?action=TEMPLATE&text={{event.title}}&dates={{event.goog_time}}/{{event.goog_time}}&details=&location={{event.venue}}&sf=true&output=xml" class="button is-info">Add this event to your Google Calendar</a>
             </div>
         
             <div class="column is-one-third">

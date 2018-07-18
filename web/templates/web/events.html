@@ -17,7 +17,7 @@
                 <p><strong>Date and Time:</strong>{{post.date}}</p>
                 <br>
                 <a href="{% url 'web:event_detail' post.id %}" class="button is-primary">Details</a>
-                &nbsp;&nbsp;&nbsp;<a href="">Add to Google Calendar</a>
+                &nbsp;&nbsp;&nbsp;<a href="https://www.google.com/calendar/render?action=TEMPLATE&text={{post.title}}&dates={{post.goog_time}}/{{post.goog_time}}&details=&location={{post.venue}}&sf=true&output=xml" target="_blank">Add to Google Calendar</a>
             </div>
         </div>
         {% endfor %}

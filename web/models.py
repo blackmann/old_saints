@@ -18,7 +18,8 @@ class Chapter(models.Model):
 
 
 class Alumnum(models.Model):
-    user = models.OneToOneField(User, related_name="alumnum", on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User, related_name="alumnum", on_delete=models.CASCADE)
     mobile = models.CharField(max_length=17)
     telephone = models.CharField(max_length=17, blank=True)
     whatsapp = models.CharField(max_length=17, blank=True)
@@ -28,16 +29,18 @@ class Alumnum(models.Model):
     address_line_1 = models.CharField(max_length=50)
     address_line_2 = models.CharField(max_length=50)
     year_of_completion = models.IntegerField()
-    exam_type = models.CharField(max_length=20) # o/a level, sss, wassce
-    house = models.ForeignKey(House, related_name="alumni", on_delete=models.CASCADE)
-    chapter = models.ForeignKey(Chapter, related_name="alumni", on_delete=models.CASCADE)
+    exam_type = models.CharField(max_length=20)  # o/a level, sss, wassce
+    house = models.ForeignKey(
+        House, related_name="alumni", on_delete=models.CASCADE)
+    chapter = models.ForeignKey(
+        Chapter, related_name="alumni", on_delete=models.CASCADE)
     member_id = models.CharField(max_length=20)
     profession = models.CharField(max_length=100)
     nickname = models.CharField(max_length=70, blank=True)
 
     reference_1 = models.TextField(blank=True)
     reference_2 = models.TextField(blank=True)
-    
+
     verified = models.BooleanField(default=False)
     executive = models.BooleanField(default=False)
 
@@ -56,7 +59,8 @@ class Alumnum(models.Model):
 
 
 class Dues(models.Model):
-    alumnum = models.ForeignKey(Alumnum, related_name="dues", on_delete=models.CASCADE)
+    alumnum = models.ForeignKey(
+        Alumnum, related_name="dues", on_delete=models.CASCADE)
     amount = models.DecimalField(default=0.0, max_digits=10, decimal_places=2)
     date_paid = models.DateField(auto_now=True)
     for_how_many_months = models.PositiveIntegerField(default=1)
@@ -80,7 +84,8 @@ class Job(models.Model):
     qualifications = models.CharField(max_length=100)
     deadline = models.DateField()
     profession_type = models.CharField(max_length=100, default="General")
-    posted_by = models.ForeignKey(Alumnum, related_name="jobs", on_delete=models.CASCADE)
+    posted_by = models.ForeignKey(
+        Alumnum, related_name="jobs", on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('-date_added', )
@@ -90,7 +95,8 @@ class Job(models.Model):
 
 
 class Scholarship(models.Model):
-    posted_by = models.ForeignKey(Alumnum, related_name="scholarships", on_delete=models.CASCADE)
+    posted_by = models.ForeignKey(
+        Alumnum, related_name="scholarships", on_delete=models.CASCADE)
     title = models.CharField(max_length=70)
     school = models.CharField(max_length=70)
     description = models.TextField()
@@ -118,7 +124,8 @@ class Project(models.Model):
     least_contribution = models.DecimalField(decimal_places=2, max_digits=6)
     active = models.BooleanField(default=True)
     date_created = models.DateTimeField(auto_now_add=True)
-    project_type = models.ForeignKey(ProjectType, related_name="project", on_delete=models.CASCADE)
+    project_type = models.ForeignKey(
+        ProjectType, related_name="project", on_delete=models.CASCADE)
     image1 = models.ImageField(upload_to="images/", blank=True)
     image2 = models.ImageField(upload_to="images/", blank=True)
     image3 = models.ImageField(upload_to="images/", blank=True)
@@ -129,10 +136,11 @@ class Project(models.Model):
     class Meta:
         ordering = ('-date_created', )
 
-    
     def __str__(self):
         return self.title
 
+def fill(s):
+    return str(s).rjust(2, '0')
 
 class Event(models.Model):
     title = models.CharField(max_length=100)
@@ -146,6 +154,13 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
-    
 
-
+    @property
+    def goog_time(self):
+        n = self.date
+        return "%d%s%sT%s%s%sZ" % (n.year,
+                                   fill(n.month),
+                                   fill(n.day), 
+                                   fill(n.hour), 
+                                   fill(n.minute), 
+                                   fill(n.second))
