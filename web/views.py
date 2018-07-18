@@ -12,7 +12,7 @@ from web.models import Alumnum, Chapter, House, Job, Scholarship, \
 
 SALARIES = ['1000-2000', '2000-5000', '5000-10000', ]
 
-DEGREES = ['Bachelors Degree', 'Masters Degree', 'PhD', ]
+DEGREES = ['Bachelors', 'Masters', 'PhD', ]
 
 DUES_PER_MONTH = 5.0
 
@@ -318,8 +318,16 @@ def job_detail(request, job_id):
 @login_required
 def scholarships(request):
     context = {
-        'scholarships': Scholarship.objects.all()
+        'degrees': DEGREES
     }
+    scholarships = Scholarship.objects.all()
+    if int(request.GET.get('f', '0')):
+        degree = request.GET.get('degree', 0)
+        if degree and not degree == 'all':
+            scholarships = scholarships.filter(degree=degree)
+            context['degree'] = degree
+
+    context['scholarships'] = scholarships.all()
     return render(request, 'web/scholarships.html', context)
 
 

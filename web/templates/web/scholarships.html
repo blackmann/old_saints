@@ -13,7 +13,8 @@
                     <div class="level-item">
                         <strong>Filter</strong>
                     </div>
-                    <div class="level-item">
+                    <input type="hidden" name="f" value="1">
+                    {% comment %} <div class="level-item">
                         <div class="control">
                             <div class="select">
                                 <select name="profession" id="">
@@ -23,15 +24,15 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     <div class="level-item">
                         <div class="control">
                             <div class="select">
-                                <select name="profession" id="">
+                                <select name="degree" id="">
                                     <option value="all">All Degrees</option>
-                                    <option value="accounting">Bachelors</option>
-                                    <option value="bachelors">Masters</option>
-                                    <option value="phd">PhD</option>
+                                    {% for deg in degrees %}
+                                    <option value="{{deg}}" {% if deg == degree %}selected{% endif %}>{{deg}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>
