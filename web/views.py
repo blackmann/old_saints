@@ -63,8 +63,8 @@ def get_date(date_str):
     """
     split_date = [int(val) for val in date_str.split('/')]
 
-    return datetime.date(day=split_date[0],
-                         month=split_date[1],
+    return datetime.date(day=split_date[1],
+                         month=split_date[0],
                          year=split_date[2])
 
 
@@ -484,9 +484,16 @@ def project_detail(request, project_id):
 
 @login_required
 def profile(request, alumn_id):
+    alumnum = get_object_or_404(Alumnum, pk=int(alumn_id))
+    
     context = {
-        "profile": get_object_or_404(Alumnum, pk=int(alumn_id))
+        "profile": alumnum
     }
+
+    if request.user.alumnum == alumnum:
+        context['jobs'] = alumnum.jobs.all()
+        context['scholarships'] = alumnum.scholarships.all()
+
     return render(request, "web/profile.html", context)
 
 

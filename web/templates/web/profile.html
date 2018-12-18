@@ -81,5 +81,66 @@
             </tr>
         </tbody>
     </table>
+
+    {% if jobs %}
+    <p class="title is-3">Job Posts</p>
+    <p>Job opportunities you have posted</p>
+    <br>
+    {% for job in jobs %}
+    <div class="box">
+        <p class="title is-4">{{job.post_title}}</p>
+        <p>{{job.short_description}}</p>
+
+        <br>
+        <div class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <a href="" class="button">Details</a>
+                </div>
+            </div>
+
+            <div class="level-rigth">
+                <div class="level-item">
+                    <a class="has-text-danger" href="">Delete this post</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+    {% endfor %}
+    {% else %}
+    {% endif %}
+    <br><br>
+    {% if scholarships %}
+    <p class="title is-3">Scholarship Posts</p>
+    <p>Scholarship opportunities you have posted</p>
+    <br>
+    {% for scholarship in scholarships %}
+    <div class="box">
+        <p class="title is-4">{{scholarship.title}}</p>
+        <p>{{scholarship.description|truncatechars:200}}</p>
+
+        <br>
+        <div class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <a href="" class="button">Details</a>
+                </div>
+            </div>
+
+            <div class="level-rigth">
+                <div class="level-item">
+                    <a class="has-text-danger" href="">Delete this post</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+    {% endfor %}
+    {% else %}
+    {% endif %}
+
 </div>
 {% endblock content %}

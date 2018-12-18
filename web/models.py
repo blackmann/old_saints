@@ -74,7 +74,7 @@ class Dues(models.Model):
 class Job(models.Model):
     post_title = models.CharField(max_length=70)
     position = models.CharField(max_length=70)
-    short_description = models.CharField(max_length=250)
+    short_description = models.TextField()
     job_description = models.TextField()
     salary_range = models.CharField(max_length=60)
     location = models.CharField(max_length=70)
